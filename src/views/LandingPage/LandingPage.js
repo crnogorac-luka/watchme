@@ -1,6 +1,8 @@
 import React from 'react';
 import './LandingPage.scss'
 import { useNavigate} from 'react-router-dom';
+import { getAllGenres, getMovie, getTrending } from '../../services/api/api';
+
 
 const LandingPage = () => {
 
@@ -9,6 +11,10 @@ const LandingPage = () => {
   const handleClick = () => {
     navigate('/discover');
   };
+
+  //getTrending()
+  //getAllGenres()
+  getMovie(852096)
 
   return (
     <div className='container'>
