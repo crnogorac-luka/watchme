@@ -1,0 +1,25 @@
+@import '../utils/index';
+@import '../variables/colors';
+@import '../typography';
+
+.btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: pxToRem(15px) pxToRem(32px);
+    gap: pxToRem(10px);
+    border: 0;
+    border-radius: pxToRem(5px);
+    @include smallTitle;
+}
+
+.btn-cta {
+    background-color: $airBlue;
+    color: $darkBlue;
+
+    &:hover {
+        cursor: pointer;
+        background-color: $primary;
+    }
+}
