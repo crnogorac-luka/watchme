@@ -3,6 +3,7 @@ import AllMoviesPage from "./views/AllMoviesPage/AllMoviesPage";
 import LandingPage from "./views/LandingPage/LandingPage";
 import MovieDiscoveryPage from "./views/MovieDiscoveryPage/MovieDiscoveryPage";
 import NotFoundPage from "./views/NotFoundPage/NotFoundPage";
+import './global.scss';
 
 function App() {
   return (
