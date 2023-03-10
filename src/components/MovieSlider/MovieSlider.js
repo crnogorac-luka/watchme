@@ -19,7 +19,6 @@ const MovieSlider = ({ timeWindow, genre }) => {
   }, [dispatch, timeWindow, genre]);
 
   const movies = useSelector(selectTrendingMovies);
-  console.log(movies);
 
   if (!movies) {
     return <div>Loading...</div>;
@@ -53,7 +52,6 @@ const MovieSlider = ({ timeWindow, genre }) => {
 
 const createMovieInstance = (movieData) => {
   const { id, title, poster_path } = movieData;
-  console.log(movieData);
   return new Movie(
     id,
     null,

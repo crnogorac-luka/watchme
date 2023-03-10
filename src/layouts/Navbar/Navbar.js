@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHeart,
+  faInfoCircle,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 import logo from "@assets/logo.svg";
 import "./Navbar.scss";
 
@@ -22,7 +26,24 @@ const Navbar = () => {
             <FontAwesomeIcon icon={faInfoCircle} className="navbar__icon" />
           </div>
         </div>
-        <div className="navbar__bottom"></div>
+        <div className="navbar__bottom">
+        <Link to="/movies" className="text-link">
+          <span>All Movies</span>
+          </Link>
+          <form class="search-form">
+            <input
+              class="search-form__input"
+              type="text"
+              placeholder="Search..."
+            />
+            <button class="search-form__button" type="submit">
+              <FontAwesomeIcon
+                icon={faMagnifyingGlass}
+                className="search-form__button__icon"
+              />
+            </button>
+          </form>
+        </div>
       </div>
     </nav>
   );
