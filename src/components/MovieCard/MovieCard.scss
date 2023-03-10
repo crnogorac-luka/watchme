@@ -1,0 +1,30 @@
+@import '@styles/variables';
+@import '@styles/utils';
+
+.movie-card-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    border-radius: pxToRem(8px);
+    cursor: pointer;
+
+    .movie-card-poster {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transition: transform 0.2s ease-out;
+    }
+
+    .icon-favorite {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 10px;
+        color: $airBlue;
+      }
+}
