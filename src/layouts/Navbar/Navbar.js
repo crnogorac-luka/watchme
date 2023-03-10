@@ -30,13 +30,13 @@ const Navbar = () => {
         <Link to="/movies" className="text-link">
           <span>All Movies</span>
           </Link>
-          <form class="search-form">
+          <form className="search-form">
             <input
-              class="search-form__input"
+              className="search-form__input"
               type="text"
               placeholder="Search..."
             />
-            <button class="search-form__button" type="submit">
+            <button className="search-form__button" type="submit">
               <FontAwesomeIcon
                 icon={faMagnifyingGlass}
                 className="search-form__button__icon"

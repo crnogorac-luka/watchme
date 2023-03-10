@@ -24,6 +24,13 @@
 
   @include breakpoint(sm) {
     flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.navbar__left {
+  @include breakpoint(sm) {
+    order: 2;
   }
 }
 
@@ -36,11 +43,20 @@
 
 .navbar__top {
   justify-content: space-between;
+  @include breakpoint(sm) {
+    justify-content: flex-start;
+    width: fit-content;
+    gap: pxToRem(16px);
+  }
 }
 
 .navbar__bottom {
   justify-content: stretch;
   gap: pxToRem(16px);
+
+  @include breakpoint(sm) {
+    width: fit-content;
+  }
 
   .text-link {
     white-space: nowrap;
@@ -94,7 +110,7 @@
 }
 
 .navbar__icon {
-  color: $white;
+  color: $lightGray;
 }
 
 .navbar__logo {

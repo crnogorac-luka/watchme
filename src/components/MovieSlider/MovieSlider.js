@@ -8,8 +8,13 @@ import { Movie } from "../../models/Movie.js";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./MovieSlider.scss";
+//import "./MovieSlider.scss";
 import MovieCard from "../MovieCard/MovieCard";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
 
 const MovieSlider = ({ timeWindow, genre }) => {
   const dispatch = useDispatch();
@@ -35,17 +40,24 @@ const MovieSlider = ({ timeWindow, genre }) => {
 
   return (
     <div className="slider-container">
-    <Slider {...settings}>
+    <Swiper
+      spaceBetween={50}
+      slidesPerView={3}
+      onSlideChange={() => console.log('slide change')}
+      onSwiper={(swiper) => console.log(swiper)}
+    >
       {movies &&
         movies.map((movieItem) => {
           const movie = createMovieInstance(movieItem);
           return (
-            <div key={movie.id} className="slider-item">
+            <SwiperSlide key={movie.id}>
+            <div className="slider-item">
               <MovieCard movie={movie} />
             </div>
+            </SwiperSlide>
           );
         })}
-    </Slider>
+    </Swiper>
     </div>
   );
 };
