@@ -84,7 +84,8 @@ const createMovieInstance = (movieData) => {
     null,
     null,
     null,
-    genre_ids
+    genre_ids,
+    false
   );
 };
 

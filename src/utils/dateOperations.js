@@ -1,3 +1,3 @@
 export const stringToDate = (dateString) => {
-    return new Date(stringToDate)
+    return new Date(dateString)
 }

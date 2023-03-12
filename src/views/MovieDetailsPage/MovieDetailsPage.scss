@@ -1,0 +1,70 @@
+@import "@styles/variables";
+@import "@styles/typography";
+@import "@styles/utils";
+
+.container-page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    padding: 0 pxToRem(16px);
+    background-color: $darkBlue;
+    padding-bottom: pxToRem(40px);
+}
+
+.movie-info-text {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: pxToRem(24px);
+    padding: pxToRem(16px) 0;
+
+    h2,
+    p {
+        margin: 0;
+        text-align: left;
+    }
+
+    h2 {
+        @include pageHeading;
+        color: $white;
+    }
+
+    .subtitle {
+        color: $gray;
+    }
+
+    table {
+        border-spacing: 0 pxToRem(16px);
+        tr > td {
+            @include smallTitle;
+            color: $gray;
+            text-transform: uppercase;
+            padding-right: pxToRem(32px);
+        }
+        tr > td:last-child {
+            @include bodyText;
+            color: $white;
+            text-transform: none;
+            width: 100%;
+            padding-right: 0;
+        }
+    }
+}
+
+.video-trailer {
+    margin-bottom: pxToRem(-3px);
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+
+    iframe {
+        
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+    }
+}
