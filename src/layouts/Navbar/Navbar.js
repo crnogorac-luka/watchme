@@ -15,7 +15,7 @@ const Navbar = () => {
       <div className="navbar__container">
         <div className="navbar__top">
           <div className="navbar__left">
-            <FontAwesomeIcon icon={faHeart} className="navbar__icon" />
+            <FontAwesomeIcon icon={faHeart} className="navbar__icon icon-small" />
           </div>
           <div className="navbar__center">
             <Link to="/">
@@ -23,7 +23,7 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="navbar__right">
-            <FontAwesomeIcon icon={faInfoCircle} className="navbar__icon" />
+            <FontAwesomeIcon icon={faInfoCircle} className="navbar__icon icon-small" />
           </div>
         </div>
         <div className="navbar__bottom">

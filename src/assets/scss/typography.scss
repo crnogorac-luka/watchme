@@ -57,3 +57,11 @@
     @include font-size(16px);
     //line-height: 19px;
 }
+
+@mixin smallBodyText {
+    font-family: 'Lato', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    @include font-size(12px);
+    //line-height: 19px;
+}

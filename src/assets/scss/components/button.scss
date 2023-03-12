@@ -23,3 +23,16 @@
         background-color: $primary;
     }
 }
+
+.btn-card {
+    width: 100%;
+    background-color: $gray;
+    color: $lightGray;
+    padding: pxToRem(10px) pxToRem(32px);
+    @include bodyText;
+
+    &:hover {
+        cursor: pointer;
+        background-color: $airBlue;
+    }
+}

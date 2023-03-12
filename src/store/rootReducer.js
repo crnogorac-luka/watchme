@@ -1,8 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit';
+import genresReducer from './features/genres/genresReducer';
 import trendingMoviesReducer from './features/trendingMovies/trendingMoviesSlice';
 
 const rootReducer = combineReducers({
-  trendingMovies: trendingMoviesReducer
+  trendingMovies: trendingMoviesReducer,
+  genres: genresReducer
 });
 
 export default rootReducer;

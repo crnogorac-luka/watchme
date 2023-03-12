@@ -5,16 +5,10 @@ import {
   selectTrendingMovies,
 } from "../../store/features/trendingMovies/trendingMoviesSlice";
 import { Movie } from "../../models/Movie.js";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-//import "./MovieSlider.scss";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import "./MovieSlider.scss";
 import MovieCard from "../MovieCard/MovieCard";
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
-import 'swiper/css';
 
 const MovieSlider = ({ timeWindow, genre }) => {
   const dispatch = useDispatch();
@@ -29,54 +23,68 @@ const MovieSlider = ({ timeWindow, genre }) => {
     return <div>Loading...</div>;
   }
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    adaptiveHeight: true,
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 5,
+      slidesToSlide: 5,
+      partialVisibilityGutter: 60,
+      additionalTransfrom: -60
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+      slidesToSlide: 2,
+      partialVisibilityGutter: 50,
+      additionalTransfrom: -50
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      slidesToSlide: 1,
+      partialVisibilityGutter: 30,
+      additionalTransfrom: -30
+    },
   };
 
   return (
-    <div className="slider-container">
-    <Swiper
-      spaceBetween={50}
-      slidesPerView={3}
-      onSlideChange={() => console.log('slide change')}
-      onSwiper={(swiper) => console.log(swiper)}
+    <Carousel
+    responsive={responsive}
+    infinite={false}
+    autoPlay={false}
+    keyBoardControl={true}
+    partialVisible={true}
+    containerClass=""
+    removeArrowOnDeviceType={["tablet", "mobile"]}
+    dotListClass="slider-list"
+    itemClass="slider-item"
     >
       {movies &&
         movies.map((movieItem) => {
           const movie = createMovieInstance(movieItem);
           return (
-            <SwiperSlide key={movie.id}>
-            <div className="slider-item">
-              <MovieCard movie={movie} />
-            </div>
-            </SwiperSlide>
+              <MovieCard key={movie.id} movie={movie} />
           );
         })}
-    </Swiper>
-    </div>
+    </Carousel>
   );
 };
 
 const createMovieInstance = (movieData) => {
-  const { id, title, poster_path } = movieData;
+  const { id, title, poster_path, release_date, genre_ids } = movieData;
   return new Movie(
     id,
     null,
     title,
     null,
-    null,
+    release_date,
     null,
     poster_path,
     null,
     null,
     null,
     null,
-    null
+    genre_ids
   );
 };
 

@@ -1,5 +1,5 @@
 export class Movie {
-    constructor(id, imdbId, title, originalTitle, releaseDate, overview, posterPath, popularity, runtime, voteAverage, originalLanguage, genreIds) {
+    constructor(id, imdbId, title, originalTitle, releaseDate, overview, posterPath, popularity, runtime, voteAverage, originalLanguage, genreIds, isFavorite) {
         this.id = id;
         this.imdbId = imdbId;
         this.title = title;
@@ -12,5 +12,6 @@ export class Movie {
         this.voteAverage = voteAverage;
         this.originalLanguage = originalLanguage;
         this.genreIds = genreIds;
+        this.isFavorite = isFavorite
     }
 }

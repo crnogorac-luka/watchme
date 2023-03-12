@@ -12,7 +12,6 @@ export const getTrending = async (timeWindow) => {
         }
       }
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -20,6 +19,7 @@ export const getTrending = async (timeWindow) => {
   }
 };
 
+// GET ALL GENRES
 export const getAllGenres = async () => {
   try {
     const response = await axios.get(
@@ -30,7 +30,6 @@ export const getAllGenres = async () => {
         }
       }
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -38,6 +37,7 @@ export const getAllGenres = async () => {
   }
 };
 
+//GET IMDBINFO BY EXTERNAL ID
 export const getImdbInfo = async (externalId) => {
   try {
     const response = await axios.get(
@@ -49,7 +49,6 @@ export const getImdbInfo = async (externalId) => {
         }
       }
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -57,11 +56,29 @@ export const getImdbInfo = async (externalId) => {
   }
 };
 
-
+// GET MOVIE BY MOVIEID
 export const getMovie = async (movieId) => {
     try {
       const response = await axios.get(
         `${API_BASE_URL}/movie/${movieId}`, {
+          params: {
+              api_key: API_KEY,
+              language: "en-US"
+          }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
+  };
+
+  // GET VIDEOS BY MOVIEID
+  export const getVideos = async (movieId) => {
+    try {
+      const response = await axios.get(
+        `${API_BASE_URL}/movie/${movieId}/videos`, {
           params: {
               api_key: API_KEY,
               language: "en-US"
@@ -75,4 +92,3 @@ export const getMovie = async (movieId) => {
       return error;
     }
   };
-

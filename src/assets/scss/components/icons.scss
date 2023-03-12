@@ -1,0 +1,22 @@
+@import '../utils/';
+@import '../variables/colors';
+
+///////////////////////////
+// SIZE
+///////////////////////////
+
+.icon-small {
+    height: pxToRem(24px);
+}
+
+.icon-big {
+    height: pxToRem(40px);
+}
+
+///////////////////////////
+// COLOR
+///////////////////////////
+
+.icon-white {
+    color: $white;
+}
