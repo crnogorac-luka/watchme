@@ -16,7 +16,7 @@ const genresSlice = createSlice({
       },
       fetchGenresSuccess: (state, action) => {
         state.loading = false;
-        state.movies = action.payload;
+        state.genres = action.payload;
       },
       fetchGenresFailure: (state, action) => {
         state.loading = false;
@@ -30,6 +30,7 @@ const genresSlice = createSlice({
       dispatch(genresSlice.actions.fetchGenresRequest());
       return getAllGenres()
         .then(response => {
+          console.log("RESPONSE:");
             console.log(response.genres);
           const genres = response.genres;
           dispatch(genresSlice.actions.fetchGenresSuccess(genres));
@@ -41,7 +42,7 @@ const genresSlice = createSlice({
   };
 
 export const selectGenres = state => {
-    console.log(state); // log the state object to the console
+  console.log(state);
     return state.genres.genres;
   };;
 

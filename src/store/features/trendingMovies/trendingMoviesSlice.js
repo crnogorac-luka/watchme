@@ -25,18 +25,14 @@ const trendingMoviesSlice = createSlice({
     },
   });
 
-  export const fetchTrendingMovies = (timeWindow, genreId) => {
+  export const fetchTrendingMovies = (timeWindow) => {
     return dispatch => {
       dispatch(trendingMoviesSlice.actions.fetchTrendingMoviesRequest());
       return getTrending(timeWindow)
         .then(response => {
             console.log(response.results);
           const movies = response.results;
-          let filteredMovies = movies;
-        if (genreId) {
-            filteredMovies = movies.filter(movie => movie.genre_ids?.includes(genreId) ?? false);
-        }
-          dispatch(trendingMoviesSlice.actions.fetchTrendingMoviesSuccess(filteredMovies));
+          dispatch(trendingMoviesSlice.actions.fetchTrendingMoviesSuccess(movies));
         })
         .catch(error => {
           dispatch(trendingMoviesSlice.actions.fetchTrendingMoviesFailure(error.message));
@@ -45,7 +41,7 @@ const trendingMoviesSlice = createSlice({
   };
 
 export const selectTrendingMovies = state => {
-    console.log(state); // log the state object to the console
+     // log the state object to the console
     return state.trendingMovies.movies;
   };;
 

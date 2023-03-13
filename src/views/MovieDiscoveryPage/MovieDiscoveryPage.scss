@@ -1,6 +1,15 @@
+@import "@styles/variables";
+@import "@styles/typography";
+@import "@styles/utils";
+
 .container-page {
     display: flex;
     flex-direction: column;
     width: 100%;
     height: fit-content;
+}
+
+h2 {
+    @include sectionHeading;
+    color: $white;
 }

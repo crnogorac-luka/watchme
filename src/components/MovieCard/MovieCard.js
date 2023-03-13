@@ -1,7 +1,9 @@
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { selectGenres } from "../../store/features/genres/genresSlice";
 import { stringToDate } from "../../utils/dateOperations";
 import "./MovieCard.scss";
 
@@ -11,6 +13,8 @@ const MovieCard = ({ movie }) => {
   const handleClick = () => {
     navigate(`/movie/${movie.id}`);
   };
+
+  const genres = useSelector(selectGenres);
 
   return (
     <div className="movie-card-container" onClick={handleClick}>
@@ -24,13 +28,13 @@ const MovieCard = ({ movie }) => {
       <div className="movie-card-body">
         <div className="movie-card-text">
           <p>
-            {movie.releaseDate} -  min
+            {stringToDate(movie.releaseDate).getFullYear()}
           </p>
           <h3>{movie.title}</h3>
           <p>
             {movie.genreIds.map((id, index) => (
               <span key={id}>
-                {id}
+                {genres.find(genre => genre.id === id)}
                 {index === movie.genreIds.length - 1 ? "" : ", "}
               </span>
             ))}

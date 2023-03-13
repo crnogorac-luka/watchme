@@ -14,13 +14,18 @@ const MovieSlider = ({ timeWindow, genre }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchTrendingMovies(timeWindow, genre));
+    dispatch(fetchTrendingMovies(timeWindow));
   }, [dispatch, timeWindow, genre]);
 
   const movies = useSelector(selectTrendingMovies);
 
   if (!movies) {
     return <div>Loading...</div>;
+  }
+
+  if(genre) {
+    movies = movies.filter(movie => movie.genre_ids?.includes(genre.id) ?? false);
+    console.log("CATEGORY " + genre)
   }
 
   const responsive = {

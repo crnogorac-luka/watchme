@@ -15,13 +15,22 @@ const MovieDiscoveryPage = () => {
   }, [dispatch]);
 
   const genres = useSelector(selectGenres);
+  console.log(genres);
 
-
+  if (!genres) {
+    return <div>Loading genres...</div>;
+  }
 
   return (
-    <div className="container-page">
+    <div>
       <Navbar />
-      <MovieSlider timeWindow="week" genre={35} />
+      <div className="container-page">
+        <h2>Hot new movies</h2>
+      <MovieSlider timeWindow="week" />
+      <h2>Trending by category</h2>
+      <MovieSlider timeWindow="day" genre={genres && genres.find(genre => genre?.name === "Comedy")} />
+      </div>
+      
     </div>
   );
 };
