@@ -93,3 +93,27 @@ export const getMovie = async (movieId) => {
       return error;
     }
   };
+
+
+  //GET ALL MOVIES + FILTER AND SORT
+  export const getAllMovies = async (page, filters, sort) => {
+  try {
+    const response = await axios.get(
+      `${API_BASE_URL}discover/movie`, {
+        params: {
+            api_key: API_KEY,
+            language: "en-US",
+            page: page,
+            filters: JSON.stringify(filters),
+            sort: JSON.stringify(sort)
+        }
+      }
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+  

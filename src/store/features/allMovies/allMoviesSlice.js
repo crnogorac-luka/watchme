@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getAllMovies } from '../../../services/api/api';
 
 const initialState = {
   movies: [],
   loading: false,
   error: null,
+  page: 1,
   filters: {},
   sort: {},
 };
@@ -23,6 +25,9 @@ export const allMoviesSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    setPage: (state, action) => {
+        state.page = action.payload;
+    },
     setFilters: (state, action) => {
       state.filters = action.payload;
     },
@@ -33,21 +38,23 @@ export const allMoviesSlice = createSlice({
 });
 
 
-export const fetchMovies = (filters, sort) => async (dispatch) => {
+export const fetchMovies = (page, filters, sort) => async (dispatch) => {
   dispatch(allMoviesSlice.actions.fetchMoviesRequest());
-  try {
+  
     // Fetch the list of movies based on the filters and sort options
-    const response = await fetch(`/api/movies?filters=${JSON.stringify(filters)}&sort=${JSON.stringify(sort)}`);
-    const data = await response.json();
-    dispatch(allMoviesSlice.actions.fetchMoviesSuccess(data));
-  } catch (error) {
+    return getAllMovies(page, filters, sort)
+    .then(response => {
+        dispatch(allMoviesSlice.actions.fetchMoviesSuccess(response.results));
+    })
+    
+.catch(error => {
     dispatch(allMoviesSlice.actions.fetchMoviesFailure(error.message));
-  }
+  })
 };
 
 export const selectAllMovies = state => {
     //console.log(state);
-      return state.allMovies;
+      return state.allMovies.movies;
     };;
   
   export default allMoviesSlice.reducer;
