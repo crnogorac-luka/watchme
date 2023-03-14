@@ -4,22 +4,20 @@ import Navbar from "../../layouts/Navbar/Navbar";
 import "./MovieDiscoveryPage.scss";
 import { fetchGenres, selectGenres } from "../../store/features/genres/genresSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { createGenre, parseGenres } from "../../services/utils/parseGenres";
 
 
 const MovieDiscoveryPage = () => {
 
   const dispatch = useDispatch();
+  const allGenres = useSelector(selectGenres);
 
   useEffect(() => {
     dispatch(fetchGenres());
+    console.log(allGenres)
   }, [dispatch]);
 
-  const genres = useSelector(selectGenres);
-  console.log(genres);
 
-  if (!genres) {
-    return <div>Loading genres...</div>;
-  }
 
   return (
     <div>
@@ -27,8 +25,13 @@ const MovieDiscoveryPage = () => {
       <div className="container-page">
         <h2>Hot new movies</h2>
       <MovieSlider timeWindow="week" />
-      <h2>Trending by category</h2>
-      <MovieSlider timeWindow="day" genre={genres && genres.find(genre => genre?.name === "Comedy")} />
+      <h2>Trending by genre</h2>
+      <h4>Action</h4>
+      <MovieSlider timeWindow="day" genre={allGenres && allGenres.find(genre => genre.name === "Action")} />
+      <h4>Horror</h4>
+      <MovieSlider timeWindow="day" genre={allGenres && allGenres.find(genre => genre.name === "Horror")} />
+      <h4>Comedy</h4>
+      <MovieSlider timeWindow="day" genre={allGenres && allGenres.find(genre => genre.name === "Comedy")} />
       </div>
       
     </div>

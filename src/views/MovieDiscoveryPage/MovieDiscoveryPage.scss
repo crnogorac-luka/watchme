@@ -13,3 +13,10 @@ h2 {
     @include sectionHeading;
     color: $white;
 }
+
+h4 {
+    @include infoHeading;
+    color: $gray;
+    text-transform: uppercase;
+    margin-top: 0;
+}

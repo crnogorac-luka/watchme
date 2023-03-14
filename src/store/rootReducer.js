@@ -1,5 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import genresReducer from './features/genres/genresReducer';
+import genresReducer from './features/genres/genresSlice';
 import trendingMoviesReducer from './features/trendingMovies/trendingMoviesSlice';
 
 const rootReducer = combineReducers({

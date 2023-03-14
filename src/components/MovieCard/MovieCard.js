@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { parseGenres } from "../../services/utils/parseGenres";
 import { selectGenres } from "../../store/features/genres/genresSlice";
 import { stringToDate } from "../../utils/dateOperations";
 import "./MovieCard.scss";
@@ -34,7 +35,7 @@ const MovieCard = ({ movie }) => {
           <p>
             {movie.genreIds.map((id, index) => (
               <span key={id}>
-                {genres.find(genre => genre.id === id)}
+                {genres && parseGenres(genres).find(genre => genre?.id === id)?.name }
                 {index === movie.genreIds.length - 1 ? "" : ", "}
               </span>
             ))}

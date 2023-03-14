@@ -10,14 +10,17 @@ import "react-multi-carousel/lib/styles.css";
 import "./MovieSlider.scss";
 import MovieCard from "../MovieCard/MovieCard";
 
-const MovieSlider = ({ timeWindow, genre }) => {
+const MovieSlider = ({ timeWindow, genre}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchTrendingMovies(timeWindow));
+    //console.log(genre);
   }, [dispatch, timeWindow, genre]);
 
-  const movies = useSelector(selectTrendingMovies);
+  let movies = useSelector(selectTrendingMovies);
+  
+  //console.log("MOVIES SET")
 
   if (!movies) {
     return <div>Loading...</div>;
@@ -25,8 +28,10 @@ const MovieSlider = ({ timeWindow, genre }) => {
 
   if(genre) {
     movies = movies.filter(movie => movie.genre_ids?.includes(genre.id) ?? false);
-    console.log("CATEGORY " + genre)
+    //console.log("GENRE " + genre)
   }
+
+
 
   const responsive = {
     desktop: {
