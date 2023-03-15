@@ -11,13 +11,16 @@ import {
   fetchMovies,
   selectAllMovies,
 } from "../../store/features/allMovies/allMoviesSlice";
+import Sidebar from "react-sidebar";
 
 import "./AllMoviesPage.scss";
+import Filters from "../../components/Filters/Filters";
 
 const AllMoviesPage = () => {
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState(sortOptions.POPULARITY_DESC);
   const [page, setPage] = useState(1);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const dispatch = useDispatch();
   const movies = useSelector(selectAllMovies);
 
@@ -45,13 +48,13 @@ const AllMoviesPage = () => {
       <div className="container-page">
         <div className="allmovies-header">
           <h2>All movies</h2>
-          <Link className="text-link">
+          <Link className="text-link" onClick={() => setIsSidebarOpen(true)}>
             <FontAwesomeIcon
               icon={faFilter}
               className="icon-small icon-light"
             />
             <span>Filter</span>
-          </Link>
+        </Link>
           <div className="sort">
             <p>Sorted by</p>
             <Dropdown
@@ -71,6 +74,14 @@ const AllMoviesPage = () => {
           }
         </div>
       </div>
+      <Sidebar
+        sidebar={<Filters />}
+        open={isSidebarOpen}
+        onSetOpen={setIsSidebarOpen}
+        sidebarClassName="sidebar"
+      >
+       <></>
+        </Sidebar>
     </div>
   );
 };
