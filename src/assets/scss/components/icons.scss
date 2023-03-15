@@ -1,26 +1,30 @@
 @import '../utils/';
 @import '../variables/colors';
 
-///////////////////////////
-// SIZE
-///////////////////////////
+.icon {
 
-.icon-small {
-    height: pxToRem(24px);
-}
+    //SIZE
+    &-tiny {
+      height: pxToRem(16px);
+    }
+    &-small {
+      height: pxToRem(24px);
+    }
+    &-big {
+      height: pxToRem(40px);
+    }
 
-.icon-big {
-    height: pxToRem(40px);
-}
-
-///////////////////////////
-// COLOR
-///////////////////////////
-
-.icon-white {
-    color: $white;
-}
-
-.icon-dark {
-    color: $darkBlue;
-}
+    // COLOR
+    &-white {
+      color: $white;
+    }
+    &-light {
+      color: $lightGray;
+    }
+    &-dark {
+      color: $darkBlue;
+    }
+    &-air {
+      color: $airBlue;
+    }
+  }

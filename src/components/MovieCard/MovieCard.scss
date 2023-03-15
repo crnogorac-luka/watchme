@@ -3,60 +3,65 @@
 @import '@styles/utils';
 @import '@styles/components/icons';
 
-.movie-card-container {
-    display: flex;
-    width: 100%;
+.movie-card {
+    width: fit-content;
     height: pxToRem(207px);
-    border-radius: pxToRem(8px);
     cursor: pointer;
+}
+
+.movie-card_poster {
+    height: 100%;
+    position: relative;
+    width: fit-content;    
+}
+
+.image_card {
+    display: block;
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+.movie-card_simple__image {
+    border-radius: pxToRem(8px);
+}
+
+.movie-card_simple__icon {
+    position: absolute;
+    top: pxToRem(8px);
+    left: pxToRem(8px);
+}
+
+.movie-card_extended {
+    width: 100%;
+    display: flex;
+}
+
+.movie-card-extended__content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: pxToRem(16px);
+    gap: pxToRem(8px);
     background-color: $darkGray;
+}
 
-    .poster-container {
-        height: 100%;
 
-        .poster-image {
-            display: block;
-            width: auto;
-            height: 100%;
-            object-fit: contain;
-            transition: transform 0.2s ease-out;
-        }
-    
-        
-    }
 
-    .movie-card-body {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: space-between;
-        padding: pxToRem(16px);
-        width: 100%;
-        
-        .movie-card-text {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            width: 100%;
-            gap: pxToRem(8px);
-            h3 {
-                color: $white;
-                @include smallTitle
-            }
-            p {
-                color: $gray;
-                @include bodyText
-            }
 
-            h3, p {
-                margin: 0;
-            }
-        }
+.movie-card_extended__title {
+    color: $white;
+    @include smallTitle
+}
 
-        .icon-favorite {
-            color: $airBlue;
-        }
-    }
+.movie-card_extended__info {
+    color: $gray;
+    @include bodyText
+}
 
-    
+.movie-card_extended__title, .movie-card-extended__info {
+    margin: 0;
 }

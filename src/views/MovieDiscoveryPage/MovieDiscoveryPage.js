@@ -14,7 +14,6 @@ const MovieDiscoveryPage = () => {
 
   useEffect(() => {
     dispatch(fetchGenres());
-    console.log(allGenres)
   }, [dispatch]);
 
 

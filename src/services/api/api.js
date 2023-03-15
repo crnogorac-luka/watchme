@@ -99,13 +99,13 @@ export const getMovie = async (movieId) => {
   export const getAllMovies = async (page, filters, sort) => {
   try {
     const response = await axios.get(
-      `${API_BASE_URL}discover/movie`, {
+      `${API_BASE_URL}/discover/movie`, {
         params: {
             api_key: API_KEY,
             language: "en-US",
             page: page,
-            filters: JSON.stringify(filters),
-            sort: JSON.stringify(sort)
+            filters: encodeURIComponent(filters),
+            sort_by: sort
         }
       }
     );

@@ -9,9 +9,13 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "./MovieSlider.scss";
 import MovieCard from "../MovieCard/MovieCard";
+import useViewport from "../../utils/useViewport";
+import { breakpoints } from "../../enums/breakpoints";
 
 const MovieSlider = ({ timeWindow, genre}) => {
   const dispatch = useDispatch();
+
+  const screenWidth = useViewport()
 
   useEffect(() => {
     dispatch(fetchTrendingMovies(timeWindow));
@@ -20,8 +24,6 @@ const MovieSlider = ({ timeWindow, genre}) => {
 
   let movies = useSelector(selectTrendingMovies);
   
-  //console.log("MOVIES SET")
-
   if (!movies) {
     return <div>Loading...</div>;
   }
@@ -35,25 +37,25 @@ const MovieSlider = ({ timeWindow, genre}) => {
 
   const responsive = {
     desktop: {
-      breakpoint: { max: 3000, min: 1024 },
+      breakpoint: { max: breakpoints.LG, min: breakpoints.MD },
       items: 5,
-      slidesToSlide: 5,
-      partialVisibilityGutter: 60,
-      additionalTransfrom: -60
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-      slidesToSlide: 2,
+      slidesToSlide: 4,
       partialVisibilityGutter: 50,
       additionalTransfrom: -50
     },
+    tablet: {
+      breakpoint: { max: breakpoints.MD, min: breakpoints.SM },
+      items: 2,
+      slidesToSlide: 2,
+      partialVisibilityGutter: 20,
+      additionalTransfrom: -20
+    },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
+      breakpoint: { max: breakpoints.MD, min: 0 },
+      items: 2,
       slidesToSlide: 1,
-      partialVisibilityGutter: 30,
-      additionalTransfrom: -30
+      partialVisibilityGutter: 20,
+      additionalTransfrom: -20
     },
   };
 
@@ -65,7 +67,7 @@ const MovieSlider = ({ timeWindow, genre}) => {
     keyBoardControl={true}
     partialVisible={true}
     containerClass=""
-    removeArrowOnDeviceType={["tablet", "mobile"]}
+    removeArrowOnDeviceType={["mobile"]}
     dotListClass="slider-list"
     itemClass="slider-item"
     >
@@ -73,7 +75,7 @@ const MovieSlider = ({ timeWindow, genre}) => {
         movies.map((movieItem) => {
           const movie = createMovieInstance(movieItem);
           return (
-              <MovieCard key={movie.id} movie={movie} />
+              <MovieCard key={movie.id} movie={movie} isExtended={screenWidth > breakpoints.SM} />
           );
         })}
     </Carousel>

@@ -1,0 +1,59 @@
+@import "@styles/variables";
+@import "@styles/typography";
+@import "@styles/utils";
+
+.allmovies-header {
+    display: flex;
+    align-items: center;
+    gap: pxToRem(16px);
+    flex-wrap: wrap;
+    
+    a {
+        display: flex;
+        align-items: center;
+        gap: pxToRem(8px);
+
+        span {
+            color: $lightGray;
+            @include infoHeading
+        }
+
+        :hover {
+                * {
+                    color: $primary;
+                }
+                
+
+            
+        }
+    }
+
+    .sort {
+        display: flex;
+        align-items: center;
+        gap: pxToRem(8px);
+        p {
+            @include bodyText;
+        }
+    }
+}
+
+.allmovies__grid {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    align-content: stretch;
+    gap: pxToRem(16px);
+}
+
+.allmovies__item {
+    //width: fit-content;
+}
+
+
+
+
+
+h2, p {
+    margin: 0;
+}

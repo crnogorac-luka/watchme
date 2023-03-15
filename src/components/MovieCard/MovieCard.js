@@ -8,7 +8,7 @@ import { selectGenres } from "../../store/features/genres/genresSlice";
 import { stringToDate } from "../../utils/dateOperations";
 import "./MovieCard.scss";
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, isExtended }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -18,32 +18,51 @@ const MovieCard = ({ movie }) => {
   const genres = useSelector(selectGenres);
 
   return (
-    <div className="movie-card-container" onClick={handleClick}>
-      <div className="poster-container">
-        <img
-          className="poster-image"
-          src={`https://image.tmdb.org/t/p/w500${movie.posterPath}`}
-          alt={movie.title}
-        />
-      </div>
-      <div className="movie-card-body">
-        <div className="movie-card-text">
-          <p>
-            {stringToDate(movie.releaseDate).getFullYear()}
-          </p>
-          <h3>{movie.title}</h3>
-          <p>
-            {movie.genreIds.map((id, index) => (
-              <span key={id}>
-                {genres && parseGenres(genres).find(genre => genre?.id === id)?.name }
-                {index === movie.genreIds.length - 1 ? "" : ", "}
-              </span>
-            ))}
-          </p>
+    <div>
+      {!isExtended && (
+        <div className="movie-card movie-card_simple" onClick={handleClick}>
+          <div className="movie-card_poster">
+            <img
+              className="movie-card_simple__image image_card"
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt={`${movie.title} poster`}
+            />
+            <FontAwesomeIcon
+              icon={faHeart}
+              className="movie-card_simple__icon icon-small icon-white"
+            />
+          </div>
         </div>
-        <FontAwesomeIcon icon={faHeart} className="icon-small icon-white" />
-        <button className="btn btn-card">Watch trailer</button>
-      </div>
+      )}
+      {isExtended && (
+        <div className="movie-card movie-card_extended">
+          <div className="movie-card_poster">
+            <img
+              className="movie-card_extended__image image_card"
+              src={`https://image.tmdb.org/t/p/w500${movie.posterPath}`}
+              alt={`${movie.title} poster`}
+            />
+          </div>
+          <div className="movie-card_extended__content">
+            <p className="movie-card_extended__info">
+              {stringToDate(movie.releaseDate).getFullYear()}
+            </p>
+            <h3 className="movie-card_extended__title">{movie.title}</h3>
+            <p className="movie-card_extended__info">
+              {movie.genreIds.map((id, index) => (
+                <span key={id}>
+                  {genres &&
+                    parseGenres(genres).find((genre) => genre?.id === id)?.name}
+                  {index === movie.genreIds.length - 1 ? "" : ", "}
+                </span>
+              ))}
+            </p>
+
+            <FontAwesomeIcon icon={faHeart} className="icon-small icon-white" />
+            <button className="btn btn_card">Watch trailer</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

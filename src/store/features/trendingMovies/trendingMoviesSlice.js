@@ -30,7 +30,6 @@ export const fetchTrendingMovies = (timeWindow) => {
     dispatch(trendingMoviesSlice.actions.fetchTrendingMoviesRequest());
     return getTrending(timeWindow)
       .then((response) => {
-        console.log(response.results);
         const movies = response.results;
         dispatch(
           trendingMoviesSlice.actions.fetchTrendingMoviesSuccess(movies)
@@ -45,7 +44,6 @@ export const fetchTrendingMovies = (timeWindow) => {
 };
 
 export const selectTrendingMovies = (state) => {
-  // log the state object to the console
   return state.trendingMovies.movies;
 };
 
