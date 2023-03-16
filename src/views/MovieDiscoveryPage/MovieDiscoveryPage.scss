@@ -7,17 +7,32 @@
 .slider-section {
     display: flex;
     flex-direction: column;
-    gap: pxToRem(8px);
+    gap: pxToRem(24px);
+    margin-bottom: pxToRem(24px);
+}
+
+.slider-section__subsection {
+    display: flex;
+    flex-direction: column;
+    gap: pxToRem(16px);
 }
 
 .slider-section__title {
     @include sectionHeading;
     color: $white;
+
+    @include breakpoint(lg) {
+        @include pageHeading;
+    }
 }
 
 .slider-section__subtitle {
     @include infoHeading;
     color: $gray;
     text-transform: uppercase;
+
+    @include breakpoint(lg) {
+        @include smallTitle;
+    }
 }
 

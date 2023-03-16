@@ -1,7 +1,38 @@
 @import '@styles/utils';
+@import '@styles/variables';
 
 .slider-container {
     display: flex;
     width: 100%;
-    height: pxToRem(600px);
+    height: fit-content;
+}
+
+.slider-list {
+    height: 100%; 
+}
+
+.slider-list-inner {
+    gap: pxToRem(8px);
+}
+
+.slider-item {
+    height: auto;
+}
+
+.react-multiple-carousel__arrow {
+    opacity: 0;
+    height: 100%;
+    border-radius: 0;
+
+    &--left {
+        left: 0;
+    }
+
+    &--right {
+        right: 0;
+    }
+
+    &:hover {
+        opacity: 1;
+    }
 }

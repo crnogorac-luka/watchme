@@ -1,8 +1,10 @@
 import axios from "axios";
 import queryString from "query-string";
+const NodeCache = require("node-cache");
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = process.env.REACT_APP_API_KEY;
+const cache = new NodeCache({ stdTTL: 600, checkperiod: 120 });
 
 export const getTrending = async (timeWindow) => {
   try {
@@ -22,6 +24,13 @@ export const getTrending = async (timeWindow) => {
 
 // GET ALL GENRES
 export const getAllGenres = async () => {
+  const cacheKey = "genres";
+
+    // Check if the data is already cached
+    const cachedData = cache.get(cacheKey);
+    if (cachedData) {
+      return cachedData;
+    }
   try {
     const response = await axios.get(
       `${API_BASE_URL}/genre/movie/list`, {
@@ -31,6 +40,7 @@ export const getAllGenres = async () => {
         }
       }
     );
+    cache.set(cacheKey, response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -40,6 +50,13 @@ export const getAllGenres = async () => {
 
 //GET IMDBINFO BY EXTERNAL ID
 export const getImdbInfo = async (externalId) => {
+  const cacheKey = `imdbInfo_${externalId}`;
+
+    // Check if the data is already cached
+    const cachedData = cache.get(cacheKey);
+    if (cachedData) {
+      return cachedData;
+    }
   try {
     const response = await axios.get(
       `${API_BASE_URL}/find/${externalId}`, {
@@ -50,6 +67,7 @@ export const getImdbInfo = async (externalId) => {
         }
       }
     );
+    cache.set(cacheKey, response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -59,6 +77,13 @@ export const getImdbInfo = async (externalId) => {
 
 // GET MOVIE BY MOVIEID
 export const getMovie = async (movieId) => {
+  const cacheKey = `movie_${movieId}`;
+
+    // Check if the data is already cached
+    const cachedData = cache.get(cacheKey);
+    if (cachedData) {
+      return cachedData;
+    }
     try {
       const response = await axios.get(
         `${API_BASE_URL}/movie/${movieId}`, {
@@ -68,7 +93,7 @@ export const getMovie = async (movieId) => {
           }
         }
       );
-      console.log(response.data);
+      cache.set(cacheKey, response.data);
       return response.data;
     } catch (error) {
       console.error(error);
@@ -78,6 +103,14 @@ export const getMovie = async (movieId) => {
 
   // GET VIDEOS BY MOVIEID
   export const getVideos = async (movieId) => {
+    const cacheKey = `videos_${movieId}`;
+
+    // Check if the data is already cached
+    const cachedData = cache.get(cacheKey);
+    if (cachedData) {
+      return cachedData;
+    }
+
     try {
       const response = await axios.get(
         `${API_BASE_URL}/movie/${movieId}/videos`, {
@@ -87,7 +120,7 @@ export const getMovie = async (movieId) => {
           }
         }
       );
-      console.log(response.data);
+      cache.set(cacheKey, response.data);
       return response.data;
     } catch (error) {
       console.error(error);
@@ -98,6 +131,9 @@ export const getMovie = async (movieId) => {
 
   //GET ALL MOVIES + FILTER AND SORT
   export const getAllMovies = async (page, filters, sort) => {
+
+    
+    
   try {
     const response = await axios.get(
       `${API_BASE_URL}/discover/movie/?${queryString.stringify(filters)}`, {
@@ -109,7 +145,7 @@ export const getMovie = async (movieId) => {
         },
       }
     );
-    console.log(response.data);
+    
     return response.data;
   } catch (error) {
     console.error(error);

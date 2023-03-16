@@ -90,11 +90,12 @@ const AllMoviesPage = () => {
           {movies &&
             movies.map((movieItem) => {
               return (
+                <div key={movieItem.id} className="allmovies__grid-item">
                 <MovieCard
-                  key={movieItem.id}
                   movie={movieItem}
                   isExtended={false}
                 />
+                </div>
               );
             })}
         </div>

@@ -26,6 +26,7 @@ const MovieDiscoveryPage = () => {
         </section>
         <section className="slider-section">
           <h2 className="slider-section__title">Trending by genre</h2>
+          <section className="slider-section__subsection">
           <h4 className="slider-section__subtitle">Action</h4>
           <MovieSlider
             timeWindow="day"
@@ -33,6 +34,8 @@ const MovieDiscoveryPage = () => {
               allGenres && allGenres.find((genre) => genre.name === "Action")
             }
           />
+          </section>
+          <section className="slider-section__subsection">
           <h4 className="slider-section__subtitle">Horror</h4>
           <MovieSlider
             timeWindow="day"
@@ -40,6 +43,8 @@ const MovieDiscoveryPage = () => {
               allGenres && allGenres.find((genre) => genre.name === "Horror")
             }
           />
+          </section>
+          <section className="slider-section__subsection">
           <h4 className="slider-section__subtitle">Comedy</h4>
           <MovieSlider
             timeWindow="day"
@@ -47,6 +52,25 @@ const MovieDiscoveryPage = () => {
               allGenres && allGenres.find((genre) => genre.name === "Comedy")
             }
           />
+          </section>
+          <section className="slider-section__subsection">
+          <h4 className="slider-section__subtitle">Thriller</h4>
+          <MovieSlider
+            timeWindow="day"
+            genre={
+              allGenres && allGenres.find((genre) => genre.name === "Thriller")
+            }
+          />
+          </section>
+          <section className="slider-section__subsection">
+          <h4 className="slider-section__subtitle">Drama</h4>
+          <MovieSlider
+            timeWindow="day"
+            genre={
+              allGenres && allGenres.find((genre) => genre.name === "Drama")
+            }
+          />
+          </section>
         </section>
       </div>
     </div>

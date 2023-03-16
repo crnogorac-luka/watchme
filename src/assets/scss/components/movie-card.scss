@@ -4,7 +4,8 @@
 @import '@styles/components/icons';
 
 .movie-card-wrapper {
-    height: 100%;
+    width: 100%;
+    height: auto;
     flex-grow: 1 auto;
 }
 
@@ -14,7 +15,10 @@
     cursor: pointer;
 }
 
-
+.movie-card_simple {
+    width: 100%;
+    height: auto;
+}
 
 .movie-card__poster {
     height: 100%;
@@ -44,6 +48,8 @@
 
 
 .movie-card_simple__image {
+    width: 100%;
+    height: auto;
     border-radius: pxToRem(8px);
 }
 
@@ -68,9 +74,6 @@
     gap: pxToRem(8px);
     background-color: $darkGray;
 }
-
-
-
 
 .movie-card_extended__title {
     color: $white;

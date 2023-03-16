@@ -8,14 +8,11 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "@styles/components/movie-slider.scss";
 import MovieCard from "./MovieCard";
-import useViewport from "../utils/useViewport";
 import {breakpoints} from "../enums/breakpoints";
 import Loading from "./Loading";
 
 const MovieSlider = ({ timeWindow, genre}) => {
   const dispatch = useDispatch();
-
-  const screenWidth = useViewport()
 
   useEffect(() => {
     dispatch(fetchTrendingMovies(timeWindow));
@@ -30,7 +27,6 @@ const MovieSlider = ({ timeWindow, genre}) => {
 
   if(genre) {
     movies = movies.filter(movie => movie.genre_ids?.includes(genre.id) ?? false);
-    //console.log("GENRE " + genre)
   }
 
 
@@ -46,9 +42,9 @@ const MovieSlider = ({ timeWindow, genre}) => {
     },
     tablet: {
       breakpoint: { max: breakpoints.MD, min: breakpoints.SM },
-      items: 2,
+      items: 3,
       slidesToSlide: 2,
-      partialVisibilityGutter: 20
+      partialVisibilityGutter: 30
 
     },
     mobile: {
@@ -67,15 +63,17 @@ const MovieSlider = ({ timeWindow, genre}) => {
     autoPlay={false}
     keyBoardControl={true}
     partialVisible={true}
-    containerClass=""
+    containerClass="slider-container"
     removeArrowOnDeviceType={["mobile"]}
     dotListClass="slider-list"
+    sliderClass="slider-list-inner"
     itemClass="slider-item"
+    slidesToSlide={4}
     >
       {movies &&
         movies.map((movieItem) => {
           return (
-              <MovieCard key={movieItem.id} movie={movieItem} isExtended={screenWidth > breakpoints.MD} />
+              <MovieCard key={movieItem.id} movie={movieItem} />
           );
         })}
     </Carousel>
