@@ -57,6 +57,14 @@
     position: absolute;
     top: pxToRem(8px);
     left: pxToRem(8px);
+
+    &:hover {
+        color: $gray;
+    }
+
+    &:active {
+        color: $white;
+    }
 }
 
 .movie-card_extended {

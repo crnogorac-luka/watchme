@@ -3,53 +3,51 @@ import Loading from "../../components/Loading";
 import MovieCard from "../../components/MovieCard";
 import Navbar from "../../layouts/Navbar";
 import { getMovie } from "../../services/api/api";
+import './FavoritesPage.scss';
 
 const FavoritesPage = () => {
-  const { favoriteMovies, setFavoriteMovies } = useState([{}]);
+  const [ favoriteMovies, setFavoriteMovies ] = useState([]);
 
   useEffect(() => {
     const idList = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
-    for(let itemId in idList) {
-      getMovie(itemId)
-      .then((response) => {
-        setFavoriteMovies(
-          response);
-      })
-      .catch((error) => {
-        return [];
-      })
-    }
-    
-    
-  }, [favoriteMovies]);
-
-  if (!favoriteMovies) {
-    return <Loading />;
-  }
+  Promise.all(idList.map(id => getMovie(id)))
+    .then((responses) => {
+      const favoriteMovies = responses.filter(Boolean);
+      setFavoriteMovies(prevState => [...prevState, ...favoriteMovies]);
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }, []);
 
   return (
-    <div>
-      <Navbar />
-
-      <div className="container-page">
-        <h2 className="favorites__title">Favorite movies</h2>
-
+    <div className="favorites-wrapper">
+  <Navbar />
+  { favoriteMovies ? (
+    <div className="container-page">
+      <h2 className="favorites__title">Favorite movies</h2>
+      {favoriteMovies.length > 0 ? (
         <div className="favorites__grid">
-          {favoriteMovies &&
-            favoriteMovies.map((movieItem) => {
-              return favoriteMovies.size() > 0 ? (
-                <MovieCard
-                  key={movieItem.id}
-                  movie={movieItem}
-                  isExtended={false}
-                />
-              ) : (
-                <h3>You have no favorite movies selected.</h3>
-              );
-            })}
+          {favoriteMovies.map((movieItem) => (
+            <div key={`favorite_${movieItem.id}`} className="favorites__grid-item">
+            <MovieCard
+              movie={movieItem}
+            />
+            </div>
+          ))}
         </div>
-      </div>
+      ) : (
+        <div className="no-results">
+          <h3>You have no favorite movies selected.</h3>
+          </div>
+        
+      )}
     </div>
+  ) : (
+    <Loading />
+  )}
+</div>
+
   );
 };
 

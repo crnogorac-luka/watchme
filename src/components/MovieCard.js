@@ -15,13 +15,18 @@ const MovieCard = ({ movie }) => {
     navigate(`/movie/${movie.id}`);
   };
 
+  const markFavorite = (event) => {
+    event.stopPropagation();
+    movieInstance.isFavorite ? removeFromFavorites(movieInstance.id) : addToFavorites(movieInstance.id);
+  }
+
   const movieInstance = new Movie(movie.id, null, movie.title, null, movie.release_date, null, movie.poster_path, null, null, null, null, null, isFavorite(movie.id))
 
 
   return (
     <div className="movie-card-wrapper">
-        <div className="movie-card movie-card_simple" onClick={handleClick}>
-          <div className="movie-card__poster movie-card__poster_has-icon">
+        <div className="movie-card movie-card_simple">
+          <div className="movie-card__poster movie-card__poster_has-icon" onClick={handleClick}>
             <img
               className="movie-card_simple__image image_card"
               src={`https://image.tmdb.org/t/p/w500${movieInstance.posterPath}`}
@@ -31,7 +36,7 @@ const MovieCard = ({ movie }) => {
               icon={isIconHovered || movieInstance.isFavorite ? faHeartSolid : faHeart}
               onMouseEnter={() => setIsIconHovered(true)}
               onMouseLeave={() => setIsIconHovered(false)}
-              onClick={() => movieInstance.isFavorite ? removeFromFavorites(movieInstance.id) : addToFavorites(movieInstance.id)}
+              onClick={markFavorite}
               className="movie-card_simple__icon icon-small icon-light"
             />
           </div>

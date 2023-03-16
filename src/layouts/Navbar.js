@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
@@ -10,12 +10,19 @@ import logo from "@assets/logo.svg";
 import "@styles/layout/navbar.scss";
 
 const Navbar = () => {
+
+  const navigate = useNavigate();
+
+  const openFavorites = () => {
+    navigate('/favorites');
+  };
+
   return (
     <nav className="navbar">
   <div className="navbar__container">
     <div className="navbar__top">
       <div className="navbar__left">
-      <FontAwesomeIcon icon={faHeart} className="navbar__icon icon-small" />
+      <FontAwesomeIcon icon={faHeart} className="navbar__icon icon-small" onClick={openFavorites} />
       </div>
       <div className="navbar__center">
         <Link to="/" className="navbar__logo-link">

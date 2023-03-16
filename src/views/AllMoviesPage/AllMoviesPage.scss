@@ -64,4 +64,8 @@
 .allmovies-header__title {
     @include sectionHeading;
     color: $white;
+
+    @include breakpoint(md) {
+        @include pageHeading;
+    }
 }

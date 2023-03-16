@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './LandingPage.scss'
 import { useNavigate} from 'react-router-dom';
-//import { getAllGenres, getMovie, getTrending } from '../../services/api/api';
+import { isVisited } from '../../services/utils/isVisited';
+
 
 
 const LandingPage = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if(isVisited) navigate('/discover');
+  })
+  
   const handleClick = () => {
     navigate('/discover');
   };

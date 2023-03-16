@@ -3,51 +3,14 @@
 @import "@styles/utils";
 
 
-.container-page_allmovies {
-    gap: pxToRem(24px);
-}
-
-.allmovies-header {
+.favorites-wrapper {
+    height: 100vh;
     display: flex;
-    align-items: center;
-    gap: pxToRem(16px) pxToRem(32px);
-    flex-wrap: wrap;
+    flex-direction: column;
+    background-color: $darkBlue;
 }
 
-.allmovies-header__sort {
-    display: flex;
-    align-items: center;
-    gap: pxToRem(8px);
-}
-
-.sort__label {
-    @include bodyText;
-    color: $lightGray;
-}
-
-.allmovies-header__link-filters {
-    display: flex;
-    align-items: center;
-    gap: pxToRem(8px);
-    text-decoration: none;
-
-    &:hover {
-        .link-filters__icon, .link-filters__label {
-            color: $primary;
-        }
-    }
-}
-
-.link-filters__icon, .link-filters__label {
-    color: $airBlue;
-}
-
-.link-filters__label {
-    @include infoHeading;
-    
-}
-
-.allmovies__grid {
+.favorites__grid {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
@@ -55,8 +18,24 @@
     gap: pxToRem(16px);
 }
 
+.favorites__grid-item {
+    flex-basis: pxToRem(160px);
+    flex-grow: 1;
+}
 
-.allmovies-header__title {
+
+.favorites__title {
     @include sectionHeading;
     color: $white;
+
+    @include breakpoint(md) {
+        @include pageHeading
+    }
+    
+}
+
+.no-results {
+    @include bodyText;
+    color: $lightGray;
+    margin-top: pxToRem(40px);
 }
