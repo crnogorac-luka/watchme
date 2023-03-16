@@ -3,18 +3,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Dropdown from "../../components/Dropdown/Dropdown";
-import MovieCard from "../../components/MovieCard/MovieCard";
+import Dropdown from "../../components/Dropdown";
+import MovieCard from "../../components/MovieCard";
 import { sortOptions, sortOptionsArray } from "../../enums/sortOptions";
-import Navbar from "../../layouts/Navbar/Navbar";
+import Navbar from "../../layouts/Navbar";
 import {
   fetchMovies,
   selectAllMovies,
 } from "../../store/features/allMovies/allMoviesSlice";
 import Sidebar from "react-sidebar";
-import '@styles/components/sidebar.scss'
+import "@styles/components/sidebar.scss";
 import "./AllMoviesPage.scss";
-import Filters from "../../components/Filters/Filters";
+import Filters from "../../components/Filters";
+import Loading from "../../components/Loading";
 
 const AllMoviesPage = () => {
   const [sort, setSort] = useState(sortOptions.POPULARITY_DESC);
@@ -29,7 +30,6 @@ const AllMoviesPage = () => {
     dispatch(fetchMovies(page, filters, sort));
   }, [dispatch, page, filters, sort]);
 
-
   const handleSortChange = (newSort) => {
     setSort(newSort.value);
   };
@@ -37,6 +37,10 @@ const AllMoviesPage = () => {
   const handlePageChange = (newPage) => {
     setPage(newPage);
   };
+
+  if (!movies) {
+    return <Loading />;
+  }
 
   return (
     <div>
@@ -47,27 +51,33 @@ const AllMoviesPage = () => {
         sidebarClassName="sidebar"
         overlayClassName="sidebar-overlay"
         contentClassName="sidebar-content"
-        rootClassName={isSidebarOpen ? "sidebar-wrapper--visible" : "sidebar-wrapper"}
+        rootClassName={
+          isSidebarOpen ? "sidebar-wrapper--visible" : "sidebar-wrapper"
+        }
       >
         <div></div>
       </Sidebar>
-        
+
       <Navbar />
       {/* Render filter and sort options here */}
-      <div className="container-page">
+      <div className="container-page container-page_allmovies">
         <div className="allmovies-header">
           <h2 className="allmovies-header__title">All movies</h2>
-          <Link className="allmovies-header__link-filters" >
+          <Link className="allmovies-header__link-filters">
             <FontAwesomeIcon
               icon={faFilter}
               className="link-filters__icon icon-small icon-light"
             />
-            <span className="link-filters__label" onClick={() => setIsSidebarOpen(true)}>Filters</span>
-        </Link>
-          <div className="sort">
-            <p>Sorted by</p>
+            <span
+              className="link-filters__label"
+              onClick={() => setIsSidebarOpen(true)}
+            >
+              Filters
+            </span>
+          </Link>
+          <div className="allmovies-header__sort">
+            <p className="sort__label">Sorted by</p>
             <Dropdown
-            
               options={sortOptionsArray}
               defaultValue={sortOptionsArray.find(
                 (option) => option.value === sort
@@ -77,14 +87,18 @@ const AllMoviesPage = () => {
           </div>
         </div>
         <div className="allmovies__grid">
-          {
-            movies && movies.map(movieItem => {
-              return <MovieCard key={movieItem.id} movie={movieItem} isExtended={false} className="allmovies__item"/>
-            })
-          }
+          {movies &&
+            movies.map((movieItem) => {
+              return (
+                <MovieCard
+                  key={movieItem.id}
+                  movie={movieItem}
+                  isExtended={false}
+                />
+              );
+            })}
         </div>
       </div>
-      
     </div>
   );
 };

@@ -7,7 +7,7 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "@assets/logo.svg";
-import "./Navbar.scss";
+import "@styles/layout/navbar.scss";
 
 const Navbar = () => {
   return (

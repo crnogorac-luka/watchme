@@ -2,28 +2,34 @@
 @import "@styles/typography";
 @import "@styles/utils";
 
+
+.container-page_allmovies {
+    gap: pxToRem(24px);
+}
+
 .allmovies-header {
     display: flex;
     align-items: center;
-    gap: pxToRem(16px);
+    gap: pxToRem(16px) pxToRem(32px);
     flex-wrap: wrap;
-    
-    
+}
 
-    .sort {
-        display: flex;
-        align-items: center;
-        gap: pxToRem(8px);
-        p {
-            @include bodyText;
-        }
-    }
+.allmovies-header__sort {
+    display: flex;
+    align-items: center;
+    gap: pxToRem(8px);
+}
+
+.sort__label {
+    @include bodyText;
+    color: $lightGray;
 }
 
 .allmovies-header__link-filters {
     display: flex;
     align-items: center;
     gap: pxToRem(8px);
+    text-decoration: none;
 
     &:hover {
         .link-filters__icon, .link-filters__label {
@@ -37,7 +43,8 @@
 }
 
 .link-filters__label {
-    @include infoHeading
+    @include infoHeading;
+    
 }
 
 .allmovies__grid {
@@ -46,10 +53,6 @@
     flex-wrap: wrap;
     align-content: stretch;
     gap: pxToRem(16px);
-}
-
-.allmovies__item {
-    //width: fit-content;
 }
 
 

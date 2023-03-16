@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "@styles/components/filters.scss";
 import { useDispatch } from "react-redux";
-import { setFilters } from "../../store/features/allMovies/allMoviesSlice";
+import { setFilters } from "../store/features/allMovies/allMoviesSlice";
 
 const Filters = () => {
   const dispatch = useDispatch();

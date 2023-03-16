@@ -3,14 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   fetchTrendingMovies,
   selectTrendingMovies,
-} from "../../store/features/trendingMovies/trendingMoviesSlice";
-import { Movie } from "../../models/Movie.js";
+} from "../store/features/trendingMovies/trendingMoviesSlice";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import "./MovieSlider.scss";
-import MovieCard from "../MovieCard/MovieCard";
-import useViewport from "../../utils/useViewport";
-import { breakpoints } from "../../enums/breakpoints";
+import "@styles/components/movie-slider.scss";
+import MovieCard from "./MovieCard";
+import useViewport from "../utils/useViewport";
+import {breakpoints} from "../enums/breakpoints";
+import Loading from "./Loading";
 
 const MovieSlider = ({ timeWindow, genre}) => {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const MovieSlider = ({ timeWindow, genre}) => {
   let movies = useSelector(selectTrendingMovies);
   
   if (!movies) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if(genre) {
@@ -36,26 +36,27 @@ const MovieSlider = ({ timeWindow, genre}) => {
 
 
   const responsive = {
+
     desktop: {
-      breakpoint: { max: breakpoints.LG, min: breakpoints.MD },
-      items: 5,
-      slidesToSlide: 4,
-      partialVisibilityGutter: 50,
-      additionalTransfrom: -50
+      breakpoint: { max: breakpoints.XL, min: breakpoints.MD },
+      items: 3,
+      slidesToSlide: 2,
+      partialVisibilityGutter: 50
+
     },
     tablet: {
       breakpoint: { max: breakpoints.MD, min: breakpoints.SM },
       items: 2,
       slidesToSlide: 2,
-      partialVisibilityGutter: 20,
-      additionalTransfrom: -20
+      partialVisibilityGutter: 20
+
     },
     mobile: {
-      breakpoint: { max: breakpoints.MD, min: 0 },
+      breakpoint: { max: breakpoints.SM, min: 0 },
       items: 2,
       slidesToSlide: 1,
-      partialVisibilityGutter: 20,
-      additionalTransfrom: -20
+      partialVisibilityGutter: 20
+
     },
   };
 
@@ -73,32 +74,13 @@ const MovieSlider = ({ timeWindow, genre}) => {
     >
       {movies &&
         movies.map((movieItem) => {
-          const movie = createMovieInstance(movieItem);
           return (
-              <MovieCard key={movie.id} movie={movie} isExtended={screenWidth > breakpoints.SM} />
+              <MovieCard key={movieItem.id} movie={movieItem} isExtended={screenWidth > breakpoints.MD} />
           );
         })}
     </Carousel>
   );
 };
 
-const createMovieInstance = (movieData) => {
-  const { id, title, poster_path, release_date, genre_ids } = movieData;
-  return new Movie(
-    id,
-    null,
-    title,
-    null,
-    release_date,
-    null,
-    poster_path,
-    null,
-    null,
-    null,
-    null,
-    genre_ids,
-    false
-  );
-};
 
 export default MovieSlider;

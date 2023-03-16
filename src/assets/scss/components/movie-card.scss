@@ -3,16 +3,36 @@
 @import '@styles/utils';
 @import '@styles/components/icons';
 
+.movie-card-wrapper {
+    height: 100%;
+    flex-grow: 1 auto;
+}
+
 .movie-card {
     width: fit-content;
     height: pxToRem(207px);
     cursor: pointer;
 }
 
-.movie-card_poster {
+
+
+.movie-card__poster {
     height: 100%;
     position: relative;
     width: fit-content;    
+}
+
+.movie-card__poster_has-icon {
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-top: pxToRem(64px) solid rgba(0, 0, 0, 0.5);
+        border-right: pxToRem(64px) solid transparent;
+        width: 0;
+        height: 0;
+    }
 }
 
 .image_card {

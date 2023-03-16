@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./MovieDetailsPage.scss";
 import { useParams } from "react-router-dom";
-import Navbar from "../../layouts/Navbar/Navbar";
+import Navbar from "../../layouts/Navbar";
 import { getMovie, getVideos } from "../../services/api/api";
 import { Movie } from "../../models/Movie";
 import { Genre } from "../../models/Genre";

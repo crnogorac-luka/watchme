@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import MovieSlider from "@components/MovieSlider/MovieSlider";
-import Navbar from "../../layouts/Navbar/Navbar";
+import MovieSlider from "../../components/MovieSlider";
+import Navbar from "../../layouts/Navbar";
 import "./MovieDiscoveryPage.scss";
 import {
   fetchGenres,

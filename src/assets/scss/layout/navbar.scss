@@ -57,10 +57,10 @@
   @include breakpoint(sm) {
     width: fit-content;
   }
+}
 
-  .navbar__link{
-    white-space: nowrap;
-  }
+.navbar__link{
+  white-space: nowrap;
 }
 
 .navbar__search-form{
@@ -72,20 +72,20 @@
   border-radius: pxToRem(4px);
   padding: 0 pxToRem(16px);
   background-color: $darkGray;
+}
 
-  .navbar__search-form-input {
-    border: 0;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    color: $white;
-    @include bodyText;
+.navbar__search-form-input {
+  border: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  color: $white;
+  @include bodyText;
 
-    &:focus {
-      outline: none;
-      &::placeholder {
-        color: transparent;
-      }
+  &:focus {
+    outline: none;
+    &::placeholder {
+      color: transparent;
     }
   }
 }
