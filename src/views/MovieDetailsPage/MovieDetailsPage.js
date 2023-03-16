@@ -7,7 +7,8 @@ import { Movie } from "../../models/Movie";
 import { Genre } from "../../models/Genre";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { stringToDate } from "../../utils/dateOperations";
+import { getReleaseYear } from "../../utils/dateOperations";
+import { addToFavorites, isFavorite, removeFromFavorites } from "../../services/utils/favoritesHandler";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -23,29 +24,30 @@ const MovieDetailsPage = () => {
     return genresArray;
   };
 
-  const getMovieInstance = (data) => {
-    const movieInstance = new Movie(
-      data.id,
-      data.imdb_id,
-      data.title,
-      data.original_title,
-      data.release_date,
-      data.overview,
-      data.poster_path,
-      data.popularity,
-      data.runtime,
-      data.vote_average,
-      data.original_language,
-      data.genres,
-      false
-    );
-    return movieInstance;
-  };
+
+
+
+  
 
   useEffect(() => {
     getMovie(movieId)
       .then((response) => {
-        setSelectedMovie(getMovieInstance(response));
+        const movieInstance = new Movie(
+          response.id,
+          response.imdb_id,
+          response.title,
+          response.original_title,
+          response.release_date,
+          response.overview,
+          response.poster_path,
+          response.popularity,
+          response.runtime,
+          response.vote_average,
+          response.original_language,
+          response.genres,
+          false
+        );
+        setSelectedMovie(movieInstance);
       })
       .catch((error) => {
         console.log(error);
@@ -82,7 +84,7 @@ const MovieDetailsPage = () => {
           <p className="movie-details-content__subtitle">
             (
             {selectedMovie &&
-              stringToDate(selectedMovie.releaseDate).getFullYear()}
+              getReleaseYear(selectedMovie.releaseDate)}
             )
           </p>
           <p className="movie-details-content__overview-text">
@@ -117,8 +119,8 @@ const MovieDetailsPage = () => {
             </tbody>
           </table>
         </div>
-        <button className="btn btn_cta">
-          Add to favorites
+        <button className="btn btn_cta" onClick={() => selectedMovie.isFavorite ? removeFromFavorites(movieId) : addToFavorites(movieId)}>
+          {isFavorite(movieId) ? "Remove from favorites" : "Add to favorites"}
           <FontAwesomeIcon icon={faHeart} className="icon-small icon-dark" />
         </button>
       </div>

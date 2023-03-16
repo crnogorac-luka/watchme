@@ -5,6 +5,7 @@ import MovieDiscoveryPage from "./views/MovieDiscoveryPage/MovieDiscoveryPage";
 import NotFoundPage from "./views/NotFoundPage/NotFoundPage";
 import "./global.scss";
 import MovieDetailsPage from "./views/MovieDetailsPage/MovieDetailsPage";
+import FavoritesPage from "./views/FavoritesPage/FavoritesPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/discover" element={<MovieDiscoveryPage />} />
           <Route exact path="/movies" element={<AllMoviesPage />} />
+          <Route exact path="/favorites" element={<FavoritesPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>

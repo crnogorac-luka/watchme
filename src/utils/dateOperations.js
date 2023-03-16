@@ -1,3 +1,4 @@
-export const stringToDate = (dateString) => {
-    return new Date(dateString)
+export const getReleaseYear = (dateString) => {
+    const date = new Date(dateString);
+    return date.getFullYear();
 }
