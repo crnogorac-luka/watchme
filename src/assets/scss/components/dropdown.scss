@@ -16,5 +16,13 @@
       }
 }
 
+.dropdown-container {
+    background-color: transparent;
+    border: 0;
+    :focus, :active {
+        outline: none;
+      }
+}
+
 
 

@@ -12,9 +12,6 @@ const LandingPage = () => {
     navigate('/discover');
   };
 
-  //getTrending()
-  //getAllGenres()
-  //getMovie(852096)
 
   return (
     <div className='container'>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import queryString from "query-string";
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -99,14 +100,13 @@ export const getMovie = async (movieId) => {
   export const getAllMovies = async (page, filters, sort) => {
   try {
     const response = await axios.get(
-      `${API_BASE_URL}/discover/movie`, {
+      `${API_BASE_URL}/discover/movie/?${queryString.stringify(filters)}`, {
         params: {
             api_key: API_KEY,
             language: "en-US",
             page: page,
-            filters: encodeURIComponent(filters),
             sort_by: sort
-        }
+        },
       }
     );
     console.log(response.data);

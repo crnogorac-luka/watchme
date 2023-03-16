@@ -15,32 +15,32 @@ const MovieDetailsPage = () => {
   const [selectedMovie, setSelectedMovie] = useState();
   const [trailerId, setTrailerId] = useState(null);
 
-    const getGenresArray = (data) => {
-        let genresArray = [];
-        for (let genre in data?.genres) {
-            genresArray.push(new Genre(genre.id, genre.name));
-        }
-        return genresArray;
+  const getGenresArray = (data) => {
+    let genresArray = [];
+    for (let genre in data?.genres) {
+      genresArray.push(new Genre(genre.id, genre.name));
     }
+    return genresArray;
+  };
 
-    const getMovieInstance = (data) => {
-        const movieInstance = new Movie(
-            data.id,
-            data.imdb_id,
-            data.title,
-            data.original_title,
-            data.release_date,
-            data.overview,
-            data.poster_path,
-            data.popularity,
-            data.runtime,
-            data.vote_average,
-            data.original_language,
-            data.genres,
-            false
-          );
-        return movieInstance;
-    }
+  const getMovieInstance = (data) => {
+    const movieInstance = new Movie(
+      data.id,
+      data.imdb_id,
+      data.title,
+      data.original_title,
+      data.release_date,
+      data.overview,
+      data.poster_path,
+      data.popularity,
+      data.runtime,
+      data.vote_average,
+      data.original_language,
+      data.genres,
+      false
+    );
+    return movieInstance;
+  };
 
   useEffect(() => {
     getMovie(movieId)
@@ -64,26 +64,28 @@ const MovieDetailsPage = () => {
       });
   }, [movieId]);
 
-
   return (
     <div>
       <Navbar />
       <div className="video-trailer">
-      <iframe
-      
-      src={`http://www.youtube.com/embed/${trailerId}?showinfo=0&enablejsapi=1&origin=http://localhost:3000`}
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-      title="Embedded youtube trailer for the movie"
-    />
-    </div>
-      <div className="container-page">
-        <div className="movie-info-text">
-          <h2>{selectedMovie && selectedMovie.title}</h2>
-          <p className="subtitle">
-            ({selectedMovie && stringToDate(selectedMovie.releaseDate).getFullYear()})
+        <iframe
+          src={`http://www.youtube.com/embed/${trailerId}?showinfo=0&enablejsapi=1&origin=http://localhost:3000`}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          title="Embedded youtube trailer for the movie"
+          className="video-trailer__iframe"
+        />
+      </div>
+      <div className="container-page container-page_movie-details">
+        <div className="movie-details-content">
+          <h2 className="movie-details-content__title">{selectedMovie && selectedMovie.title}</h2>
+          <p className="movie-details-content__subtitle">
+            (
+            {selectedMovie &&
+              stringToDate(selectedMovie.releaseDate).getFullYear()}
+            )
           </p>
-          <p className="overview-text">
+          <p className="movie-details-content__overview-text">
             {selectedMovie && selectedMovie.overview}
           </p>
           <table>
@@ -94,25 +96,31 @@ const MovieDetailsPage = () => {
               </tr>
               <tr>
                 <td>Genres</td>
-                <td>{selectedMovie && selectedMovie.genreIds && selectedMovie.genreIds.map((genre, index) => (
-              <span key={genre.id}>
-                {genre.name}
-                {index === selectedMovie.genreIds.length - 1 ? "" : ", "}
-              </span>
-            ))}</td>
+                <td>
+                  {selectedMovie &&
+                    selectedMovie.genreIds &&
+                    selectedMovie.genreIds.map((genre, index) => (
+                      <span key={genre.id}>
+                        {genre.name}
+                        {index === selectedMovie.genreIds.length - 1
+                          ? ""
+                          : ", "}
+                      </span>
+                    ))}
+                </td>
               </tr>
               <tr>
                 <td>Runtime</td>
                 <td>{selectedMovie && selectedMovie.runtime} min</td>
               </tr>
-              <tr>
-                <td>Director</td>
-                <td></td>
-              </tr>
+              
             </tbody>
           </table>
         </div>
-        <button className="btn btn-cta">Add to favorites<FontAwesomeIcon icon={faHeart} className="icon-small icon-dark" /></button>
+        <button className="btn btn_cta">
+          Add to favorites
+          <FontAwesomeIcon icon={faHeart} className="icon-small icon-dark" />
+        </button>
       </div>
     </div>
   );

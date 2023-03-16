@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getAllMovies } from "../../../services/api/api";
 
+
 const initialState = {
   movies: [],
   loading: false,
@@ -60,3 +61,5 @@ export const selectAllMovies = (state) => {
 };
 
 export default allMoviesSlice.reducer;
+
+export const { fetchMoviesRequest, fetchMoviesSuccess, fetchMoviesFailure, setPage, setFilters, setSort } = allMoviesSlice.actions;

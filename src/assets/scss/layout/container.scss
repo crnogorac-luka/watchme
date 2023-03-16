@@ -1,0 +1,8 @@
+.container-page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    padding: 0 pxToRem(16px);
+    background-color: $darkBlue;
+}

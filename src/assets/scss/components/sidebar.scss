@@ -2,6 +2,25 @@
 @import '../variables/colors';
 @import '../typography';
 
+.sidebar-wrapper {
+    visibility: hidden;
+
+    &--visible {
+        visibility: visible;
+    }
+}
+
+
 .sidebar {
     background-color: $darkBlue;
+
 }
+
+.sidebar-content {
+    
+}
+
+.sidebar-overlay {
+    background-color: rgba(0, 0, 0, 0.692) !important;
+}
+

@@ -30,10 +30,10 @@ const Navbar = () => {
       <Link to="/movies" className="navbar__link text-link">
         <span className="navbar__link-text">All Movies</span>
       </Link>
-      <form className="navbar__search-form search-form">
-        <input className="navbar__search-form-input search-form__input" type="text" placeholder="Search..." />
-        <button className="navbar__search-form-button search-form__button" type="submit">
-          <FontAwesomeIcon icon={faMagnifyingGlass} className="navbar__search-form-icon search-form__button-icon icon-white icon-tiny" />
+      <form className="navbar__search-form ">
+        <input className="navbar__search-form-input" type="text" placeholder="Search..." />
+        <button className="navbar__search-form-button" type="submit">
+          <FontAwesomeIcon icon={faMagnifyingGlass} className="navbar__search-form-icon icon-white icon-tiny" />
         </button>
       </form>
     </div>

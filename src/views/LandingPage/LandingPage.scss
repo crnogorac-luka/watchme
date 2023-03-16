@@ -1,4 +1,5 @@
 @import '@styles/components/button.scss';
+@import '@styles/utils';
 
 .container {
     height: 100vh;
@@ -7,10 +8,12 @@
     justify-content: center;
     align-items: center;
     background-color: $darkBlue;
+    gap: pxToRem(24px)
+    
+}
 
-    .info-title {
-        @include pageHeading;
-        text-align: center;
-        color: $white;
-    }
+.info-title {
+    @include pageHeading;
+    text-align: center;
+    color: $white;
 }

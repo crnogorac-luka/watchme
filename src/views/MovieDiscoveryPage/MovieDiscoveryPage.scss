@@ -1,22 +1,23 @@
 @import "@styles/variables";
 @import "@styles/typography";
 @import "@styles/utils";
+@import "@styles/layout/container.scss";
 
-.container-page {
+
+.slider-section {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: fit-content;
+    gap: pxToRem(8px);
 }
 
-h2 {
+.slider-section__title {
     @include sectionHeading;
     color: $white;
 }
 
-h4 {
+.slider-section__subtitle {
     @include infoHeading;
     color: $gray;
     text-transform: uppercase;
-    margin-top: 0;
 }
+

@@ -1,0 +1,44 @@
+@import '../utils/index';
+@import '../variables/colors';
+@import '../typography';
+
+.filters {
+    display: flex;
+    flex-direction: column;
+    gap: pxToRem(16px);
+    padding: pxToRem(24px) pxToRem(24px);
+}
+
+.filters__title {
+    @include smallTitle;
+    color: $primary;
+}
+
+.filters-form {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.filters-form__form-group {
+    display: flex;
+    gap: pxToRem(16px);
+    align-items: center;
+}
+
+.filters-form__label {
+    @include bodyText;
+    color: $lightGray;
+    text-transform: uppercase;
+}
+
+.filters-form__input {
+    width: pxToRem(64px);
+    text-align: center;
+    background-color: transparent;
+    border: pxToRem(2px) solid $white;
+    border-radius: pxToRem(8px);
+    outline: 0;
+    color: $white;
+    @include bodyText;
+}

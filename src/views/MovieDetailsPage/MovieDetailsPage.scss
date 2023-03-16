@@ -1,38 +1,40 @@
 @import "@styles/variables";
 @import "@styles/typography";
 @import "@styles/utils";
+@import "@styles/components/button.scss";
+@import "@styles/layout/container.scss";
 
-.container-page {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: fit-content;
-    padding: 0 pxToRem(16px);
-    background-color: $darkBlue;
+.container-page_movie-details {
+    gap: pxToRem(16px);
     padding-bottom: pxToRem(40px);
+    padding-top: pxToRem(24px);
+
+    @include breakpoint(md) {
+        padding-left: pxToRem(200px);
+        padding-right: pxToRem(200px);
+        padding-bottom: pxToRem(80px);
+    }
+
+    @include breakpoint(lg) {
+        padding-left: pxToRem(300px);
+        padding-right: pxToRem(300px);
+    }
+
+    @include breakpoint(xl) {
+        padding-left: pxToRem(400px);
+        padding-right: pxToRem(400px);
+    }
 }
 
-.movie-info-text {
+.movie-details-content {
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: pxToRem(24px);
     padding: pxToRem(16px) 0;
 
-    h2,
-    p {
-        margin: 0;
-        text-align: left;
-    }
 
-    h2 {
-        @include pageHeading;
-        color: $white;
-    }
-
-    .subtitle {
-        color: $gray;
-    }
+    
 
     table {
         border-spacing: 0 pxToRem(16px);
@@ -52,6 +54,21 @@
     }
 }
 
+.movie-details-content__overview-text {
+    max-width: pxToRem(750px);
+    color: $white;
+    line-height: pxToRem(24px);
+}
+
+.movie-details-content__title {
+    @include pageHeading;
+    color: $white;
+}
+
+.movie-details-content__subtitle {
+    color: $gray;
+}
+
 .video-trailer {
     margin-bottom: pxToRem(-3px);
     overflow: hidden;
@@ -59,12 +76,15 @@
     position: relative;
     height: 0;
 
-    iframe {
-        
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        position: absolute;
+    @include breakpoint(md) {
+        padding-bottom: 35%;
     }
+}
+
+.video-trailer__iframe { 
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
 }
