@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Dispatch, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchTrendingMovies,
@@ -11,22 +11,20 @@ import MovieCard from "./MovieCard";
 import {breakpoints} from "../enums/breakpoints";
 import Loading from "./Loading";
 
-const MovieSlider = ({ timeWindow, genre}) => {
+const MovieSlider = ({ timeWindow, genre}: {timeWindow: string, genre: any}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchTrendingMovies(timeWindow));
+    dispatch<any>(fetchTrendingMovies(timeWindow));
     //console.log(genre);
-  }, [dispatch, timeWindow, genre]);
+  }, []);
 
   let movies = useSelector(selectTrendingMovies);
   
-  if (!movies) {
-    return <Loading />;
-  }
+ 
 
   if(genre) {
-    movies = movies.filter(movie => movie.genre_ids?.includes(genre.id) ?? false);
+    movies = movies.filter((movie: any) => movie.genre_ids?.includes(genre.id) ?? false);
   }
 
 
@@ -71,7 +69,7 @@ const MovieSlider = ({ timeWindow, genre}) => {
     slidesToSlide={4}
     >
       {movies &&
-        movies.map((movieItem) => {
+        movies.map((movieItem: any) => {
           return (
               <MovieCard key={movieItem.id} movie={movieItem} />
           );

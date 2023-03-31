@@ -6,7 +6,7 @@ const API_BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = process.env.REACT_APP_API_KEY;
 const cache = new NodeCache({ stdTTL: 600, checkperiod: 120 });
 
-export const getTrending = async (timeWindow) => {
+export const getTrending = async (timeWindow: string) => {
   try {
     const response = await axios.get(
       `${API_BASE_URL}/trending/movie/${timeWindow}`, {
@@ -24,13 +24,13 @@ export const getTrending = async (timeWindow) => {
 
 // GET ALL GENRES
 export const getAllGenres = async () => {
-  const cacheKey = "genres";
+  //const cacheKey = "genres";
 
     // Check if the data is already cached
-    const cachedData = cache.get(cacheKey);
-    if (cachedData) {
-      return cachedData;
-    }
+    // const cachedData = cache.get(cacheKey);
+    // if (cachedData) {
+    //   return cachedData;
+    // }
   try {
     const response = await axios.get(
       `${API_BASE_URL}/genre/movie/list`, {
@@ -40,7 +40,7 @@ export const getAllGenres = async () => {
         }
       }
     );
-    cache.set(cacheKey, response.data);
+    //cache.set(cacheKey, response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -49,7 +49,7 @@ export const getAllGenres = async () => {
 };
 
 //GET IMDBINFO BY EXTERNAL ID
-export const getImdbInfo = async (externalId) => {
+export const getImdbInfo = async (externalId: string | number) => {
   const cacheKey = `imdbInfo_${externalId}`;
 
     // Check if the data is already cached
@@ -76,7 +76,7 @@ export const getImdbInfo = async (externalId) => {
 };
 
 // GET MOVIE BY MOVIEID
-export const getMovie = async (movieId) => {
+export const getMovie = async (movieId: string | number) => {
   const cacheKey = `movie_${movieId}`;
 
     // Check if the data is already cached
@@ -102,7 +102,7 @@ export const getMovie = async (movieId) => {
   };
 
   // GET VIDEOS BY MOVIEID
-  export const getVideos = async (movieId) => {
+  export const getVideos = async (movieId: string | number) => {
     const cacheKey = `videos_${movieId}`;
 
     // Check if the data is already cached
@@ -130,10 +130,8 @@ export const getMovie = async (movieId) => {
 
 
   //GET ALL MOVIES + FILTER AND SORT
-  export const getAllMovies = async (page, filters, sort) => {
+  export const getAllMovies = async (page: string | number, filters: Record<string, any>, sort: string) => {
 
-    
-    
   try {
     const response = await axios.get(
       `${API_BASE_URL}/discover/movie/?${queryString.stringify(filters)}`, {

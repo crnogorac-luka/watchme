@@ -3,11 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Select from "react-select";
 import '@styles/components/dropdown.scss'
+import { SortOption } from "../enums/sortOptions";
 
-const Dropdown = ({options, defaultValue, onChange}) => {
+const Dropdown = ({options, defaultValue, onChange}: { options: SortOption[], defaultValue: SortOption, onChange?: ((value: SortOption) => void) | undefined }) => {
 
   const styles = {
-    control: (provided) => ({
+    control: (provided: Record<string, any>) => ({
       ...provided,
         backgroundColor: "transparent",
         border: 0,
@@ -25,7 +26,7 @@ const Dropdown = ({options, defaultValue, onChange}) => {
         <Select
             options={options}
             defaultValue={defaultValue}
-            onChange={onChange}
+            onChange={(option) => onChange && onChange(option as SortOption)}
             isClearable={false}
             isSearchable={false}
             classNames={{

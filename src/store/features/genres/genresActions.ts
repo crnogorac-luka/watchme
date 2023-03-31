@@ -11,14 +11,14 @@ export const fetchGenresRequest = () => {
   };
 };
 
-export const fetchGenresSuccess = (genres) => {
+export const fetchGenresSuccess = (genres: []) => {
   return {
     type: FETCH_GENRES_SUCCESS,
     payload: genres
   };
 };
 
-export const fetchGenresFailure = (error) => {
+export const fetchGenresFailure = (error: any) => {
   return {
     type: FETCH_GENRES_FAILURE,
     payload: error

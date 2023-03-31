@@ -15,7 +15,7 @@ const Filters = () => {
   }, [filterData, dispatch])
 
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: any) => {
     const { key, value } = event.target;
     const updatedFilterData = { ...filterData, [key]: value };
     setFilterData(updatedFilterData);
@@ -37,7 +37,7 @@ const Filters = () => {
             min="1900"
             max="2030"
             step="1"
-            maxLength="4"
+            maxLength={4}
             defaultValue={2023}
             type="number"
             onChange={handleInputChange}

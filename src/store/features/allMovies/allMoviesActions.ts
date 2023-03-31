@@ -10,14 +10,14 @@ export const fetchAllMoviesRequest = () => {
   };
 };
 
-export const fetchAllMoviesSuccess = (movies) => {
+export const fetchAllMoviesSuccess = (movies: []) => {
   return {
     type: FETCH_ALL_MOVIES_SUCCESS,
     payload: movies
   };
 };
 
-export const fetchAllMoviesFailure = (error) => {
+export const fetchAllMoviesFailure = (error: any) => {
   return {
     type: FETCH_ALL_MOVIES_FAILURE,
     payload: error

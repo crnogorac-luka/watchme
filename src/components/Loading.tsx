@@ -1,6 +1,6 @@
 import React from "react";
 import '@styles/components/loading-view.scss';
-import loadingIndicator from '../assets/loading.gif'
+import loadingIndicator from "../assets/loading.gif";
 
 const Loading = () => {
     return (
