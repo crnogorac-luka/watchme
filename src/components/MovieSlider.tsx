@@ -1,8 +1,6 @@
-import React, { Dispatch, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from "react";
 import {
-  fetchTrendingMovies,
-  selectTrendingMovies,
+  fetchTrendingMovies
 } from "../store/features/trendingMovies/trendingMoviesSlice";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -10,24 +8,24 @@ import "@styles/components/movie-slider.scss";
 import MovieCard from "./MovieCard";
 import {breakpoints} from "../enums/breakpoints";
 import Loading from "./Loading";
+import { Movie } from "../models/Movie";
+import { Genre } from "../models/Genre";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { parseMovies } from "../services/utils/parseMovies";
 
-const MovieSlider = ({ timeWindow, genre}: {timeWindow: string, genre: any}) => {
-  const dispatch = useDispatch();
+const MovieSlider = ({ timeWindow, genre}: {timeWindow: string, genre: Genre | null}) => {
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch<any>(fetchTrendingMovies(timeWindow));
-    //console.log(genre);
+    dispatch(fetchTrendingMovies(timeWindow));
   }, []);
 
-  let movies = useSelector(selectTrendingMovies);
+  let movies = useAppSelector(state => parseMovies(state.trendingMovies.movies))
   
- 
-
-  if(genre) {
-    movies = movies.filter((movie: any) => movie.genre_ids?.includes(genre.id) ?? false);
+  if (genre && movies) {
+    movies = movies.filter((movie: Movie) => movie.genreIds ? movie.genreIds.includes(genre.id) : false);
   }
-
-
+  
 
   const responsive = {
 

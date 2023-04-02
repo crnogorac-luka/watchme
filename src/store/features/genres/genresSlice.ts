@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../..";
 import { Genre } from "../../../models/Genre";
 import { getAllGenres } from "../../../services/api/api";
 import { parseGenres } from "../../../services/utils/parseGenres";
@@ -21,9 +22,9 @@ const genresSlice = createSlice({
         state.loading = true
         state.error = null;
       })
-      .addCase(fetchGenres.fulfilled, (state: GenresState, action: PayloadAction<Genre[]>) => {
+      .addCase(fetchGenres.fulfilled, (state: GenresState, action: PayloadAction<[]>) => {
         state.loading = false;
-        state.genres = parseGenres(action.payload);
+        state.genres = action.payload;
       })
       .addCase(fetchGenres.rejected, (state: GenresState, action: PayloadAction<any>) => {
         state.loading = false;
@@ -36,11 +37,11 @@ export const fetchGenres = createAsyncThunk(
   'genres/fetchGenres',
   async () => {
     const response = await getAllGenres();
-    return response.results;
+    return response.genres;
   }
 );
 
-export const selectGenres = (state: any) => {
+export const selectGenres = (state: RootState) => {
   return state.genres.genres;
 };
 

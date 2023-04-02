@@ -15,13 +15,14 @@ import Filters from "../../components/Filters";
 import Loading from "../../components/Loading";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import React from "react";
+import { parseMovies } from "../../services/utils/parseMovies";
 
 const AllMoviesPage = () => {
   const [sort, setSort] = useState(SortOptions.POPULARITY_DESC);
   const [page, setPage] = useState(1);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const dispatch = useAppDispatch();
-  const movies = useAppSelector(state => state.allMovies.movies);
+  const movies = useAppSelector(state => parseMovies(state.allMovies.movies));
   const filters = useAppSelector(state => state.allMovies.filters);
 
   useEffect(() => {

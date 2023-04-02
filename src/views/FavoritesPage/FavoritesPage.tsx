@@ -5,10 +5,11 @@ import MovieCard from "../../components/MovieCard";
 import Navbar from "../../layouts/Navbar";
 import { Movie } from "../../models/Movie";
 import { getMovie } from "../../services/api/api";
+import { parseMovies } from "../../services/utils/parseMovies";
 import './FavoritesPage.scss';
 
 const FavoritesPage = () => {
-  const [ favoriteMovies, setFavoriteMovies ] = useState<Movie[]>([]);
+  const [ favoriteMovies, setFavoriteMovies ] = useState<Movie[] | null>([]);
 
   useEffect(() => {
     const idList: number[] = JSON.parse(localStorage.getItem("favoriteMovies") || "[]");
@@ -17,7 +18,7 @@ const FavoritesPage = () => {
     }
     Promise.all(idList.map((id: number) => getMovie(id)))
       .then((responses) => {
-        const favoriteMovies: Movie[] = responses;
+        const favoriteMovies: Movie[] | null = parseMovies(responses);
         setFavoriteMovies(favoriteMovies);
       })
       .catch((error) => {

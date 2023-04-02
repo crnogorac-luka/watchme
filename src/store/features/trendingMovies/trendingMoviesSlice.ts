@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../..";
 import { Movie } from "../../../models/Movie";
 import { getTrending } from "../../../services/api/api";
 import { parseMovies } from "../../../services/utils/parseMovies";
@@ -21,9 +22,9 @@ const trendingMoviesSlice = createSlice({
         state.loading = true
         state.error = null;
       })
-      .addCase(fetchTrendingMovies.fulfilled, (state: MoviesState, action: PayloadAction<Movie[]>) => {
+      .addCase(fetchTrendingMovies.fulfilled, (state: MoviesState, action: PayloadAction<[]>) => {
         state.loading = false;
-        state.movies = parseMovies(action.payload);
+        state.movies = action.payload;
       })
       .addCase(fetchTrendingMovies.rejected, (state: MoviesState, action: PayloadAction<any>) => {
         state.loading = false;
@@ -40,7 +41,7 @@ export const fetchTrendingMovies = createAsyncThunk(
   }
 );
 
-export const selectTrendingMovies = (state: any) => {
+export const selectTrendingMovies = (state: RootState) => {
   return state.trendingMovies.movies;
 };
 

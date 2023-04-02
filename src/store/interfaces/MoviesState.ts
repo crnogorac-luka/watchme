@@ -1,7 +1,7 @@
 import { Movie } from "../../models/Movie"
 
 export interface MoviesState {
-    movies: Movie[] | null
+    movies: []
     loading: boolean
     error: any
   }

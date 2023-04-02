@@ -1,3 +1,5 @@
+import { Genre } from "./Genre"
+
 export class Movie {
 
     id: number
@@ -13,9 +15,9 @@ export class Movie {
     runtime?: string
     voteAverage?: number
     originalLanguage?: string
-    genreIds?: []
+    genreIds?: any[]
     
-    constructor(id: number, title: string, releaseDate: string, posterPath: string, isFavorite: boolean, originalTitle?: string, imdbId?: number, overview?: string,  popularity?: number, runtime?: string, voteAverage?: number, originalLanguage?: string, genreIds?: [] ) {
+    constructor(id: number, title: string, releaseDate: string, posterPath: string, isFavorite: boolean, originalTitle?: string, imdbId?: number, overview?: string,  popularity?: number, runtime?: string, voteAverage?: number, originalLanguage?: string, genreIds?: any[] ) {
         this.id = id;
         this.title = title;
         this.releaseDate = releaseDate;

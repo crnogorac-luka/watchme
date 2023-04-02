@@ -4,10 +4,11 @@ import Navbar from "../../layouts/Navbar";
 import "./MovieDiscoveryPage.scss";
 import { fetchGenres } from "../../store/features/genres/genresSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { parseGenres } from "../../services/utils/parseGenres";
 
 const MovieDiscoveryPage = () => {
   const dispatch = useAppDispatch()
-  const allGenres = useAppSelector(state => state.genres.genres)
+  const allGenres = useAppSelector(state => parseGenres(state.genres.genres))
 
   useEffect(() => {
     dispatch(fetchGenres());
@@ -28,7 +29,7 @@ const MovieDiscoveryPage = () => {
           <MovieSlider
             timeWindow="day"
             genre={
-              allGenres && allGenres.find((genre) => genre.name === "Action")
+              (allGenres && allGenres.find((genre) => genre.name === "Action")) || null
             }
           />
           </section>
@@ -37,7 +38,7 @@ const MovieDiscoveryPage = () => {
           <MovieSlider
             timeWindow="day"
             genre={
-              allGenres && allGenres.find((genre) => genre.name === "Horror")
+              (allGenres && allGenres.find((genre) => genre.name === "Horror")) || null
             }
           />
           </section>
@@ -46,7 +47,7 @@ const MovieDiscoveryPage = () => {
           <MovieSlider
             timeWindow="day"
             genre={
-              allGenres && allGenres.find((genre) => genre.name === "Comedy")
+              (allGenres && allGenres.find((genre) => genre.name === "Comedy")) || null
             }
           />
           </section>
@@ -55,7 +56,7 @@ const MovieDiscoveryPage = () => {
           <MovieSlider
             timeWindow="day"
             genre={
-              allGenres && allGenres.find((genre) => genre.name === "Thriller")
+              (allGenres && allGenres.find((genre) => genre.name === "Thriller")) || null
             }
           />
           </section>
@@ -64,7 +65,7 @@ const MovieDiscoveryPage = () => {
           <MovieSlider
             timeWindow="day"
             genre={
-              allGenres && allGenres.find((genre) => genre.name === "Drama")
+              (allGenres && allGenres.find((genre) => genre.name === "Drama")) || null
             }
           />
           </section>
