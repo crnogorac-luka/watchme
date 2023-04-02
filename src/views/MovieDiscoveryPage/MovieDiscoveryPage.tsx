@@ -2,15 +2,12 @@ import React, { useEffect } from "react";
 import MovieSlider from "../../components/MovieSlider";
 import Navbar from "../../layouts/Navbar";
 import "./MovieDiscoveryPage.scss";
-import {
-  fetchGenres,
-  selectGenres,
-} from "../../store/features/genres/genresSlice";
+import { fetchGenres } from "../../store/features/genres/genresSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 const MovieDiscoveryPage = () => {
-  const dispatch = useAppDispatch
-  const allGenres = useAppSelector
+  const dispatch = useAppDispatch()
+  const allGenres = useAppSelector(state => state.genres.genres)
 
   useEffect(() => {
     dispatch(fetchGenres());
@@ -22,7 +19,7 @@ const MovieDiscoveryPage = () => {
       <div className="container-page">
         <section className="slider-section">
           <h2 className="slider-section__title">Hot new movies</h2>
-          <MovieSlider timeWindow="week" />
+          <MovieSlider timeWindow="week" genre={null} />
         </section>
         <section className="slider-section">
           <h2 className="slider-section__title">Trending by genre</h2>

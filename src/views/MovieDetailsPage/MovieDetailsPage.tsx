@@ -13,57 +13,61 @@ import { addToFavorites, isFavorite, removeFromFavorites } from "../../services/
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
 
-  const [selectedMovie, setSelectedMovie] = useState();
-  const [trailerId, setTrailerId] = useState(null);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+  const [trailerId, setTrailerId] = useState<string | null>(null);
 
-  const getGenresArray = (data) => {
-    let genresArray = [];
-    for (let genre in data?.genres) {
-      genresArray.push(new Genre(genre.id, genre.name));
-    }
-    return genresArray;
+  const getGenresArray = (data: { genres: Record<string, any>[] }) => {
+    return data?.genres.map(genre => new Genre(genre.id, genre.name)) || [];
   };
 
 
-
-
-  
+  const createMovieInstance = (movieData: any) => {
+    return new Movie(
+      movieData.id,
+      movieData.title,
+      movieData.release_date,
+      movieData.poster_path,
+      false,
+      movieData.imdb_id,
+      movieData.original_title,
+      movieData.overview,
+      movieData.popularity,
+      movieData.runtime,
+      movieData.vote_average,
+      movieData.original_language,
+      movieData.genres,
+    );
+  }
 
   useEffect(() => {
-    getMovie(movieId)
-      .then((response) => {
-        const movieInstance = new Movie(
-          response.id,
-          response.imdb_id,
-          response.title,
-          response.original_title,
-          response.release_date,
-          response.overview,
-          response.poster_path,
-          response.popularity,
-          response.runtime,
-          response.vote_average,
-          response.original_language,
-          response.genres,
-          false
-        );
-        setSelectedMovie(movieInstance);
-      })
-      .catch((error) => {
+    const fetchMovie = async () => {
+      try {
+        if (movieId) {
+          const response = await getMovie(movieId);
+          const movieInstance = createMovieInstance(response);
+          setSelectedMovie(movieInstance);
+        }
+      } catch (error) {
         console.log(error);
-      });
+      }
+    }
+    fetchMovie();
   }, [movieId]);
 
   useEffect(() => {
-    getVideos(movieId)
-      .then((response) => {
-        const videos = response.results;
-        const trailer = videos.filter((video) => video.type === "Trailer")[0];
-        setTrailerId(trailer.id);
-      })
-      .catch((error) => {
+    const fetchVideos = async () => {
+      try {
+        if (movieId) {
+          const response = await getVideos(movieId);
+          const videos = response.results;
+          const trailer = videos.filter((video: { type: string, id: string }) => video.type === "Trailer")[0];
+          setTrailerId(trailer?.id || null);
+        }
+      } catch (error) {
         console.log(error);
-      });
+      }
+    }
+    fetchVideos();
   }, [movieId]);
 
   return (
@@ -94,17 +98,17 @@ const MovieDetailsPage = () => {
             <tbody>
               <tr>
                 <td>Rating</td>
-                <td>{selectedMovie && selectedMovie.voteAverage.toFixed(1)}</td>
+                <td>{selectedMovie && selectedMovie.voteAverage && selectedMovie.voteAverage.toFixed(1)}</td>
               </tr>
               <tr>
                 <td>Genres</td>
                 <td>
                   {selectedMovie &&
                     selectedMovie.genreIds &&
-                    selectedMovie.genreIds.map((genre, index) => (
+                    selectedMovie.genreIds.map((genre: Record<string, any>, index) => (
                       <span key={genre.id}>
                         {genre.name}
-                        {index === selectedMovie.genreIds.length - 1
+                        { selectedMovie && selectedMovie.genreIds && index === selectedMovie.genreIds.length - 1
                           ? ""
                           : ", "}
                       </span>
@@ -115,12 +119,12 @@ const MovieDetailsPage = () => {
                 <td>Runtime</td>
                 <td>{selectedMovie && selectedMovie.runtime} min</td>
               </tr>
-              
+
             </tbody>
           </table>
         </div>
-        <button className="btn btn_cta" onClick={() => selectedMovie.isFavorite ? removeFromFavorites(movieId) : addToFavorites(movieId)}>
-          {isFavorite(movieId) ? "Remove from favorites" : "Add to favorites"}
+        <button className="btn btn_cta" onClick={() => selectedMovie && selectedMovie.isFavorite ? movieId && removeFromFavorites(parseInt(movieId)) : movieId && addToFavorites(parseInt(movieId))}>
+          {movieId && isFavorite(parseInt(movieId)) ? "Remove from favorites" : "Add to favorites"}
           <FontAwesomeIcon icon={faHeart} className="icon-small icon-dark" />
         </button>
       </div>

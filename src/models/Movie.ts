@@ -1,32 +1,33 @@
 export class Movie {
 
     id: number
-    imdbId: number
     title: string
-    originalTitle: string
     releaseDate: string
-    overview: string
     posterPath: string
-    popularity: number
-    runtime: string
-    voteAverage: number
-    originalLanguage: string
-    genreIds: []
     isFavorite: boolean
 
-    constructor(id: number, imdbId: number, title: string, originalTitle: string, releaseDate: string, overview: string, posterPath: string, popularity: number, runtime: string, voteAverage: number, originalLanguage: string, genreIds: [], isFavorite: boolean) {
+    originalTitle?: string
+    imdbId?: number
+    overview?: string
+    popularity?: number
+    runtime?: string
+    voteAverage?: number
+    originalLanguage?: string
+    genreIds?: []
+    
+    constructor(id: number, title: string, releaseDate: string, posterPath: string, isFavorite: boolean, originalTitle?: string, imdbId?: number, overview?: string,  popularity?: number, runtime?: string, voteAverage?: number, originalLanguage?: string, genreIds?: [] ) {
         this.id = id;
-        this.imdbId = imdbId;
         this.title = title;
-        this.originalTitle = originalTitle;
         this.releaseDate = releaseDate;
-        this.overview = overview;
         this.posterPath = posterPath;
+        this.isFavorite = isFavorite
+        this.originalTitle = originalTitle;
+        this.imdbId = imdbId;
+        this.overview = overview;
         this.popularity = popularity;
         this.runtime = runtime;
         this.voteAverage = voteAverage;
         this.originalLanguage = originalLanguage;
         this.genreIds = genreIds;
-        this.isFavorite = isFavorite
     }
 }

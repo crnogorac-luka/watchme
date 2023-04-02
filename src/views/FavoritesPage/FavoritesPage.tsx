@@ -1,23 +1,28 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import Loading from "../../components/Loading";
 import MovieCard from "../../components/MovieCard";
 import Navbar from "../../layouts/Navbar";
+import { Movie } from "../../models/Movie";
 import { getMovie } from "../../services/api/api";
 import './FavoritesPage.scss';
 
 const FavoritesPage = () => {
-  const [ favoriteMovies, setFavoriteMovies ] = useState([]);
+  const [ favoriteMovies, setFavoriteMovies ] = useState<Movie[]>([]);
 
   useEffect(() => {
-    const idList = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
-  Promise.all(idList.map(id => getMovie(id)))
-    .then((responses) => {
-      const favoriteMovies = responses.filter(Boolean);
-      setFavoriteMovies(prevState => [...prevState, ...favoriteMovies]);
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+    const idList: number[] = JSON.parse(localStorage.getItem("favoriteMovies") || "[]");
+    if (idList.length === 0) {
+      return;
+    }
+    Promise.all(idList.map((id: number) => getMovie(id)))
+      .then((responses) => {
+        const favoriteMovies: Movie[] = responses;
+        setFavoriteMovies(favoriteMovies);
+      })
+      .catch((error) => {
+        console.error("Error loading favorite movies:", error);
+      })
   }, []);
 
   return (

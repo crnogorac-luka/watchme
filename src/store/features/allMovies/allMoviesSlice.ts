@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Filters } from "../../../models/Filters";
 import { Movie } from "../../../models/Movie";
 import { getAllMovies } from "../../../services/api/api";
+import { parseMovies } from "../../../services/utils/parseMovies";
 import { AllMoviesState } from "../../interfaces/AllMoviesState";
 
 
@@ -16,7 +18,14 @@ const initialState: AllMoviesState = {
 const allMoviesSlice = createSlice({
   name: "allMovies",
   initialState,
-  reducers: {},
+  reducers: {
+    setFilters: (state, action: PayloadAction<Filters>) => {
+      state.filters = action.payload;
+    }, 
+    setSort: (state, action: PayloadAction<string>) => {
+      state.sort = action.payload;
+    } 
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllMovies.pending, (state: AllMoviesState) => {
@@ -25,7 +34,7 @@ const allMoviesSlice = createSlice({
       })
       .addCase(fetchAllMovies.fulfilled, (state: AllMoviesState, action: PayloadAction<Movie[]>) => {
         state.loading = false;
-        state.movies = action.payload;
+        state.movies = parseMovies(action.payload);
       })
       .addCase(fetchAllMovies.rejected, (state: AllMoviesState, action: PayloadAction<any>) => {
         state.loading = false;
@@ -45,5 +54,7 @@ export const fetchAllMovies = createAsyncThunk(
 export const selectAllMovies = (state: any) => {
   return state.allMovies.movies;
 };
+
+export const { setFilters, setSort } = allMoviesSlice.actions;
 
 export default allMoviesSlice.reducer;

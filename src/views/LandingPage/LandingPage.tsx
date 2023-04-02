@@ -10,7 +10,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(isVisited) navigate('/discover');
+    if(isVisited()) navigate('/discover');
   })
   
   const handleClick = () => {

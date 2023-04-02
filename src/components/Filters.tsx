@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from "react";
 import "@styles/components/filters.scss";
-import { useDispatch } from "react-redux";
-import { setFilters } from "../store/features/allMovies/allMoviesSlice";
+import { useAppDispatch } from "../store/hooks";
+import { setFilters } from "../store/features/allMovies/allMoviesSlice"
+import { DateRangePicker } from 'react-date-range';
+import 'react-date-range/dist/styles.css';
+import { Filters as FiltersObject } from "../models/Filters";
+
+
 
 const Filters = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch()
 
-  const [filterData, setFilterData] = useState({
-    year: 2023,
-  });
+  const [filterData, setFilterData] = useState<FiltersObject>({});
 
   useEffect(() => {
     dispatch(setFilters(filterData));
-  }, [filterData, dispatch])
+  }, [filterData])
 
 
   const handleInputChange = (event: any) => {
     const { key, value } = event.target;
     const updatedFilterData = { ...filterData, [key]: value };
     setFilterData(updatedFilterData);
-    
   };
 
   return (
@@ -42,6 +44,13 @@ const Filters = () => {
             type="number"
             onChange={handleInputChange}
           />
+        </div>
+        <div className="filters-form__form-group">
+        <label className="filters-form__label" htmlFor="gteDate">
+            Year release
+          </label>
+          
+
         </div>
       </form>
     </div>

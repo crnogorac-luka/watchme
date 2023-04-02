@@ -1,7 +1,7 @@
 import { Genre } from "../../models/Genre"
 
 export interface GenresState {
-    genres: Genre[]
+    genres: Genre[] | null
     loading: boolean
     error: any
   }
