@@ -17,6 +17,10 @@ const Navbar = () => {
     navigate('/favorites');
   };
 
+  const showInfo = () => {
+    alert("This website was developed by Luka Crnogorac.");
+  }
+
   return (
     <nav className="navbar">
   <div className="navbar__container">
@@ -30,7 +34,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar__right">
-        <FontAwesomeIcon icon={faInfoCircle} className="navbar__icon icon-small" />
+        <FontAwesomeIcon icon={faInfoCircle} className="navbar__icon icon-small" onClick={showInfo} />
       </div>
     </div>
     <div className="navbar__bottom">
