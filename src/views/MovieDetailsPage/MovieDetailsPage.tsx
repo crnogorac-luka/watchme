@@ -41,31 +41,24 @@ const MovieDetailsPage = () => {
 
   useEffect(() => {
     const fetchMovie = async () => {
-      try {
         if (movieId) {
           const response = await getMovie(movieId);
           const movieInstance = createMovieInstance(response);
           setSelectedMovie(movieInstance);
         }
-      } catch (error) {
-        console.log(error);
-      }
     }
     fetchMovie();
   }, [movieId]);
 
   useEffect(() => {
     const fetchVideos = async () => {
-      try {
+
         if (movieId) {
           const response = await getVideos(movieId);
           const videos = response.results;
           const trailer = videos.filter((video: { type: string, id: string }) => video.type === "Trailer")[0];
           setTrailerId(trailer?.id || null);
         }
-      } catch (error) {
-        console.log(error);
-      }
     }
     fetchVideos();
   }, [movieId]);
