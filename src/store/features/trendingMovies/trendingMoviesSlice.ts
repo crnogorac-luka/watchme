@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../..";
-import { Movie } from "../../../models/Movie";
 import { getTrending } from "../../../services/api/api";
-import { parseMovies } from "../../../services/utils/parseMovies";
 import { MoviesState } from "../../interfaces/MoviesState";
 
 

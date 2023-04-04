@@ -1,7 +1,5 @@
-import { Genre } from "../../models/Genre"
+import { BaseState } from "./BaseState";
 
-export interface GenresState {
-    genres: []
-    loading: boolean
-    error: any
-  }
+export interface GenresState extends BaseState {
+  genres: []
+}

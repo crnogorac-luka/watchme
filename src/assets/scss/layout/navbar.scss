@@ -63,50 +63,6 @@
   white-space: nowrap;
 }
 
-.navbar__search-form{
-  display: flex;
-  width: 100%;
-  max-width: pxToRem(300px);
-  height: pxToRem(42px);
-  border: 0;
-  border-radius: pxToRem(4px);
-  padding: 0 pxToRem(16px);
-  background-color: $darkGray;
-}
-
-.navbar__search-form-input {
-  border: 0;
-  width: 100%;
-  height: 100%;
-  background-color: transparent;
-  color: $white;
-  @include bodyText;
-
-  &:focus {
-    outline: none;
-    &::placeholder {
-      color: transparent;
-    }
-  }
-}
-
-.navbar__search-form-icon{
-  color: $gray;
-}
-.navbar__search-form-button{
-  background-color: transparent;
-  border: 0;
-  width: fit-content;
-  height: 100%;
-  cursor: pointer;
-
-  &:hover {
-    .navbar__search-form-icon {
-      color: $white;
-    }
-  }
-}
-
 .navbar__icon {
   color: $lightGray;
 }

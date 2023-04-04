@@ -1,0 +1,41 @@
+@import "@styles/variables";
+@import "@styles/typography";
+@import "@styles/utils";
+
+
+.results-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: $darkBlue;
+}
+
+.results__grid {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    align-content: stretch;
+    gap: pxToRem(16px);
+}
+
+.results__grid-item {
+    flex-basis: pxToRem(160px);
+    flex-grow: 1;
+}
+
+
+.results__title {
+    @include sectionHeading;
+    color: $white;
+
+    @include breakpoint(md) {
+        @include pageHeading
+    }
+    
+}
+
+.no-results {
+    @include bodyText;
+    color: $lightGray;
+    margin-top: pxToRem(40px);
+}

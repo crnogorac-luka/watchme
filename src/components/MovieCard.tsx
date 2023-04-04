@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import "@styles/components/movie-card.scss";
 import { Movie } from "../models/Movie";
 import { addToFavorites, removeFromFavorites } from "../services/utils/favoritesHandler";
+import moviePosterPlaceholder from "@assets/movie-poster-placeholder.png"
 
 const MovieCard = ({ movie }: {movie: Movie}) => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const MovieCard = ({ movie }: {movie: Movie}) => {
           <div className="movie-card__poster movie-card__poster_has-icon" onClick={handleClick}>
             <img
               className="movie-card_simple__image image_card"
-              src={`https://image.tmdb.org/t/p/w500${movie.posterPath}`}
+              src={movie.posterPath ? `https://image.tmdb.org/t/p/w500${movie.posterPath}` : moviePosterPlaceholder}
               alt={`${movie.title} poster`}
             />
           </div>

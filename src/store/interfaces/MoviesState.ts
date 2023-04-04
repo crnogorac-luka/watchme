@@ -1,7 +1,5 @@
-import { Movie } from "../../models/Movie"
+import { BaseState } from "./BaseState";
 
-export interface MoviesState {
+export interface MoviesState extends BaseState {
     movies: []
-    loading: boolean
-    error: any
-  }
+}

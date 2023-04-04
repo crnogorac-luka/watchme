@@ -3,11 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
-  faInfoCircle,
-  faMagnifyingGlass,
+  faInfoCircle
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "@assets/logo.svg";
 import "@styles/layout/navbar.scss";
+import SearchBar from "../components/SearchBar";
 
 const Navbar = () => {
 
@@ -37,12 +37,7 @@ const Navbar = () => {
       <Link to="/movies" className="navbar__link text-link">
         <span className="navbar__link-text">All Movies</span>
       </Link>
-      <form className="navbar__search-form ">
-        <input className="navbar__search-form-input" type="text" placeholder="Search..." />
-        <button className="navbar__search-form-button" type="submit">
-          <FontAwesomeIcon icon={faMagnifyingGlass} className="navbar__search-form-icon icon-white icon-tiny" />
-        </button>
-      </form>
+      <SearchBar />
     </div>
   </div>
 </nav>

@@ -1,0 +1,15 @@
+@import "@styles/variables";
+@import "@styles/utils";
+
+.movies-grid {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    align-content: stretch;
+    gap: pxToRem(16px);
+}
+
+.movies-grid__item {
+    flex-basis: pxToRem(160px);
+    flex-grow: 1;
+}

@@ -4,7 +4,8 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { setFilters } from "../store/features/allMovies/allMoviesSlice"
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
-import { Filters as FiltersObject } from "../models/Filters";
+import ReactSlider from 'react-slider'
+import "@styles/components/slider.scss";
 
 
 
@@ -16,10 +17,15 @@ const Filters = () => {
 
 
   const handleInputChange = (event: any) => {
-    const { name, value }: {name: string, value: any} = event.target;
+    const { name, value }: { name: string, value: any } = event.target;
     const updatedFilterData = { ...currentFilterData, [name]: value };
     dispatch(setFilters(updatedFilterData));
   };
+
+  const handleSliderChange = (values: number[]) => {
+    const updatedFilterData = { ...currentFilterData, "vote_average.gte": values[0], "vote_average.lte": values[1] };
+    dispatch(setFilters(updatedFilterData));
+  }
 
   return (
     <div className="filters">
@@ -43,15 +49,22 @@ const Filters = () => {
           />
         </div>
         <div className="filters-form__form-group">
-          <label className="filters-form__label" htmlFor="gteDate">
-            Released later than:
-          </label>
-
-        </div>
-        <div className="filters-form__form-group">
-          <label htmlFor="">Select a value:</label>
-          <input type="range" id="gteRating" name="vote_average.gte" min="0" max="10" defaultValue={2}/>
-          <input type="range" id="lteRating" name="vote_average.lte" min="0" max="10" defaultValue={8}/>
+          <label className="filters-form__label">Rating</label>
+          <ReactSlider
+            className="slider slider_range"
+            thumbClassName="slider__thumb"
+            trackClassName="slider__track"
+            defaultValue={[0.0, 10.0]}
+            ariaLabel={['Min. rating', 'Max. rating']}
+            ariaValuetext={state => `Thumb value ${state.valueNow}`}
+            renderThumb={(props, state) => <div {...props}><span className="slider__thumb__value">{state.valueNow}</span></div>}
+            pearling
+            minDistance={0.5}
+            min={0}
+            max={10}
+            step={0.1}
+            onAfterChange={handleSliderChange}
+          />
         </div>
       </form>
     </div>

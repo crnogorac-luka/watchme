@@ -5,19 +5,23 @@
 .filters {
     display: flex;
     flex-direction: column;
-    gap: pxToRem(16px);
+    gap: pxToRem(32px);
     padding: pxToRem(24px) pxToRem(24px);
 }
 
 .filters__title {
     @include smallTitle;
     color: $primary;
+
+    @include breakpoint(md) {
+        @include bigTitle;
+    }
 }
 
 .filters-form {
     display: flex;
     flex-direction: column;
-    
+    gap: pxToRem(24px);
 }
 
 .filters-form__form-group {
@@ -27,9 +31,13 @@
 }
 
 .filters-form__label {
-    @include bodyText;
+    @include smallBodyText;
     color: $lightGray;
     text-transform: uppercase;
+
+    @include breakpoint(md) {
+        @include bodyText;
+    }
 }
 
 .filters-form__input {

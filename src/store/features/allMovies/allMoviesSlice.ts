@@ -18,14 +18,14 @@ const allMoviesSlice = createSlice({
   name: "allMovies",
   initialState,
   reducers: {
-    setPage: (state, action: PayloadAction<string>) => {
-      state.sort = action.payload;
+    setPage: (state, action: PayloadAction<number>) => {
+      state.page = action.payload;
     },
     setFilters: (state: AllMoviesState, action: PayloadAction<any>) => {
       state.filters = action.payload;
     }, 
-    setSort: (state, action: PayloadAction<number>) => {
-      state.page = action.payload;
+    setSort: (state, action: PayloadAction<string>) => {
+      state.sort = action.payload;
     }   
   },
   extraReducers: (builder) => {

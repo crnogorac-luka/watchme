@@ -7,12 +7,14 @@ import NotFoundPage from "./views/NotFoundPage/NotFoundPage";
 import "./global.scss";
 import MovieDetailsPage from "./views/MovieDetailsPage/MovieDetailsPage";
 import FavoritesPage from "./views/FavoritesPage/FavoritesPage";
+import SearchResultsPage from './views/SearchResultsPage/SearchResultsPage';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Routes>
+          <Route path="/search/:query" element={<SearchResultsPage />} />
           <Route path="/movie/:movieId" element={<MovieDetailsPage />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/discover" element={<MovieDiscoveryPage />} />

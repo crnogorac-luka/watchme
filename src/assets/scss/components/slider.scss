@@ -1,0 +1,39 @@
+@import '../utils/index';
+@import '../variables/colors';
+@import '../typography';
+
+.slider {
+    width: 100%;
+    height: pxToRem(25px);
+}
+
+.slider__thumb {
+    width: pxToRem(24px);
+    height: pxToRem(24px);
+    border: pxToRem(3px) solid $darkBlue;
+    border-radius: 50%;
+    background-color: $primary;
+    color: $darkBlue;
+    cursor: pointer;
+
+    span {
+        position: absolute;
+        top: pxToRem(24px);
+        color: $primary;
+        margin-bottom: pxToRem(-16px);
+    }
+}
+
+.slider__track {
+    top: pxToRem(8px);
+    height: pxToRem(8px);
+
+    &-1 {
+        background: $primary;
+    }
+
+    &-0, &-2 {
+        background: $gray;
+    }
+}
+

@@ -24,13 +24,13 @@ export const getTrending = async (timeWindow: string) => {
 
 // GET ALL GENRES
 export const getAllGenres = async () => {
-  //const cacheKey = "genres";
+    const cacheKey = "genres";
 
     // Check if the data is already cached
-    // const cachedData = cache.get(cacheKey);
-    // if (cachedData) {
-    //   return cachedData;
-    // }
+    const cachedData = cache.get(cacheKey);
+    if (cachedData) {
+      return cachedData;
+    }
   try {
     const response = await axios.get(
       `${API_BASE_URL}/genre/movie/list`, {
@@ -129,26 +129,51 @@ export const getMovie = async (movieId: string | number) => {
   };
 
 
-  //GET ALL MOVIES + FILTER AND SORT
+  //GET ALL MOVIES + PAGE, FILTERS AND SORT
   export const getAllMovies = async (page: number, filters: any, sort: string) => {
 
-  try {
-    const response = await axios.get(
-      `${API_BASE_URL}/discover/movie/`, {
-        params: {
-            api_key: API_KEY,
-            language: "en-US",
-            page: page,
-            sort_by: sort,
-            ...filters
-        },
-      }
-    );
-    
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    return error;
+    try {
+      const response = await axios.get(
+        `${API_BASE_URL}/discover/movie`, {
+          params: {
+              api_key: API_KEY,
+              language: "en-US",
+              page: page,
+              sort_by: sort,
+              ...filters
+          },
+        }
+      );
+      
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
+  };
+
+
+  // GET MOVIES AS SEARCH RESULT
+  export const searchMovies = async (searchQuery: string, page: number) => {
+    try {
+      const response = await axios.get(
+        `${API_BASE_URL}/search/movie`, {
+          params: {
+              api_key: API_KEY,
+              language: "en-US",
+              query: searchQuery,
+              page: page
+          },
+        }
+      );
+      
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
   }
-}
+
+
+
   
