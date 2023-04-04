@@ -1,9 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../..";
-import { Filters } from "../../../models/Filters";
-import { Movie } from "../../../models/Movie";
 import { getAllMovies } from "../../../services/api/api";
-import { parseMovies } from "../../../services/utils/parseMovies";
 import { AllMoviesState } from "../../interfaces/AllMoviesState";
 
 
@@ -24,7 +21,7 @@ const allMoviesSlice = createSlice({
     setPage: (state, action: PayloadAction<string>) => {
       state.sort = action.payload;
     },
-    setFilters: (state, action: PayloadAction<Filters>) => {
+    setFilters: (state: AllMoviesState, action: PayloadAction<any>) => {
       state.filters = action.payload;
     }, 
     setSort: (state, action: PayloadAction<number>) => {
@@ -63,6 +60,10 @@ export const selectAllMovies = (state: RootState) => {
 
 export const selectTotalPages = (state: RootState) => {
   return state.allMovies.totalPages;
+};
+
+export const selectFilters = (state: RootState) => {
+  return state.allMovies.filters;
 };
 
 export const { setPage, setFilters, setSort } = allMoviesSlice.actions;

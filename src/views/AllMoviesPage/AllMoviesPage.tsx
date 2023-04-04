@@ -95,11 +95,6 @@ const AllMoviesPage = () => {
         marginPagesDisplayed={2}
         onPageChange={handlePageChange}
         containerClassName={"pagination"}
-        previousClassName={"pagination__previous"}
-        nextClassName={"pagination__next"}
-        pageClassName={"pagination__page"}
-        breakClassName={"pagination__break"}
-        activeClassName={"pagination__page_active"}
         pageLinkClassName={"pagination__page__link"}
         previousLinkClassName={"pagination__previous__link"}
         nextLinkClassName={"pagination__next__link"}
@@ -124,11 +119,6 @@ const AllMoviesPage = () => {
         marginPagesDisplayed={2}
         onPageChange={handlePageChange}
         containerClassName={"pagination"}
-        previousClassName={"pagination__previous"}
-        nextClassName={"pagination__next"}
-        pageClassName={"pagination__page"}
-        breakClassName={"pagination__break"}
-        activeClassName={"pagination__page_active"}
         pageLinkClassName={"pagination__page__link"}
         previousLinkClassName={"pagination__previous__link"}
         nextLinkClassName={"pagination__next__link"}
