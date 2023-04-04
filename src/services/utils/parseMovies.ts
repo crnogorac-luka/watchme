@@ -1,4 +1,5 @@
 import { Movie } from "../../models/Movie";
+import { isFavorite } from "./favoritesHandler";
 
 export const parseMovies = (data: any[]) => {
     return data ? data.map((movie: any) => createMovie(movie)) : null;
@@ -19,7 +20,7 @@ export const createMovie = ({ id, title, release_date, poster_path, original_tit
     original_language ?: string,
     genre_ids ?: []
     }): Movie => {
-        return new Movie(id, title, release_date, poster_path, false, original_title, imdb_id, overview, popularity, runtime, vote_average, original_language, genre_ids);
+        return new Movie(id, title, release_date, poster_path, isFavorite(id), original_title, imdb_id, overview, popularity, runtime, vote_average, original_language, genre_ids);
 }
 
 
