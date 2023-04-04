@@ -16,26 +16,29 @@ import Loading from "../../components/Loading";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import React from "react";
 import { parseMovies } from "../../services/utils/parseMovies";
+import ReactPaginate from "react-paginate";
+import "@styles/components/pagination.scss";
 
 const AllMoviesPage = () => {
-  const [sort, setSort] = useState(SortOptions.POPULARITY_DESC);
+  const [sort, setSort] = useState<string>(SortOptions.POPULARITY_DESC);
   const [page, setPage] = useState(1);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const dispatch = useAppDispatch();
   const movies = useAppSelector(state => parseMovies(state.allMovies.movies));
   const filters = useAppSelector(state => state.allMovies.filters);
+  const totalPages = useAppSelector(state => state.allMovies.totalPages)
 
   useEffect(() => {
     // Fetch the list of movies based on the current filters and sort options
     dispatch(fetchAllMovies({page, filters, sort}));
   }, [dispatch, page, filters, sort]);
 
-  const handleSortChange = (newSort: SortOption | any) => {
-    setSort(newSort);
+  const handleSortChange = (newSort: SortOption) => {
+    setSort(newSort.value);
   };
 
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage);
+  const handlePageChange = (newPage: {selected: number}) => {
+    setPage(newPage.selected + 1);
   };
 
   if (!movies) {
@@ -86,6 +89,23 @@ const AllMoviesPage = () => {
             />
           </div>
         </div>
+        <ReactPaginate
+        pageCount={totalPages}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={2}
+        onPageChange={handlePageChange}
+        containerClassName={"pagination"}
+        previousClassName={"pagination__previous"}
+        nextClassName={"pagination__next"}
+        pageClassName={"pagination__page"}
+        breakClassName={"pagination__break"}
+        activeClassName={"pagination__page_active"}
+        pageLinkClassName={"pagination__page__link"}
+        previousLinkClassName={"pagination__previous__link"}
+        nextLinkClassName={"pagination__next__link"}
+        breakLinkClassName={"pagination__break__link"}
+        activeLinkClassName={"pagination__page_active__link"}
+      />
         <div className="allmovies__grid">
           {movies &&
             movies.map((movieItem) => {
@@ -98,6 +118,23 @@ const AllMoviesPage = () => {
               );
             })}
         </div>
+        <ReactPaginate
+        pageCount={totalPages}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={2}
+        onPageChange={handlePageChange}
+        containerClassName={"pagination"}
+        previousClassName={"pagination__previous"}
+        nextClassName={"pagination__next"}
+        pageClassName={"pagination__page"}
+        breakClassName={"pagination__break"}
+        activeClassName={"pagination__page_active"}
+        pageLinkClassName={"pagination__page__link"}
+        previousLinkClassName={"pagination__previous__link"}
+        nextLinkClassName={"pagination__next__link"}
+        breakLinkClassName={"pagination__break__link"}
+        activeLinkClassName={"pagination__page_active__link"}
+      />
       </div>
     </div>
   );

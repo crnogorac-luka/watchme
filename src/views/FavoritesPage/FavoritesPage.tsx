@@ -13,17 +13,18 @@ const FavoritesPage = () => {
 
   useEffect(() => {
     const idList: number[] = JSON.parse(localStorage.getItem("favoriteMovies") || "[]");
-    if (idList.length === 0) {
-      return;
+    if (idList.length) {
+      const getFavoriteMovies = async () => {
+        try {
+          const responses = await Promise.all(idList.map((id: number) => getMovie(id)));
+          const favoriteMovies: Movie[] | null = parseMovies(responses);
+          setFavoriteMovies(favoriteMovies);
+        } catch (error) {
+          console.error("Error loading favorite movies:", error);
+        }
+      };
+      getFavoriteMovies();
     }
-    Promise.all(idList.map((id: number) => getMovie(id)))
-      .then((responses) => {
-        const favoriteMovies: Movie[] | null = parseMovies(responses);
-        setFavoriteMovies(favoriteMovies);
-      })
-      .catch((error) => {
-        console.error("Error loading favorite movies:", error);
-      })
   }, []);
 
   return (

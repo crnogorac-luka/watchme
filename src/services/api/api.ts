@@ -130,7 +130,7 @@ export const getMovie = async (movieId: string | number) => {
 
 
   //GET ALL MOVIES + FILTER AND SORT
-  export const getAllMovies = async (page: string | number, filters: Record<string, any>, sort: string) => {
+  export const getAllMovies = async (page: number, filters: Record<string, any>, sort: string) => {
 
   try {
     const response = await axios.get(
