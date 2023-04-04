@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "@styles/components/filters.scss";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { setFilters } from "../store/features/allMovies/allMoviesSlice"
-import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import ReactSlider from 'react-slider'
 import "@styles/components/slider.scss";
